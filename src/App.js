@@ -8,26 +8,33 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import About from "./About"
 
 class App extends React.Component {
   render() {
     return (
-      <>
-        <Router>
-          <Header />
-          <Routes>
-            <Route 
-              exact path="/"
-              element={<BestBooks />}
-            >
-            </Route>
-            {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
-          </Routes>
-          <Footer />
-        </Router>
-      </>
-    )
+      <div>
+  <Router>
+      <Header />
+      <Routes>
+        <Route 
+          exact path="/"
+          element={<BestBooks />}
+          >
+        </Route>
+        {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
+        <Route 
+          exact path="/About"
+          element={<About />}
+          >
+        </Route>
+      </Routes>
+      <Footer />
+    </Router>
+      </div>
+      )
+    }
   }
-}
-
-export default App;
+  
+  export default App;
+  
