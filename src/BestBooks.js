@@ -20,8 +20,8 @@ function BestBooks() {
     
     async function componentDidMount(){
     try{
-     let BookData = await axios.get("https://localhost:3001/books");
-     console.log(BookData.data)
+     let BookData = await axios.get("http://localhost:3001/books");
+     console.log("BookData",BookData.data)
      setBooks(BookData)
   
     }
@@ -50,14 +50,18 @@ function BestBooks() {
       {books.length != 0 ? (
         <div style={{ display:"flex", justifyContent:"center",height:"100vh",alignItem:"center"}}>
           <div style={{ width:"900px"}} id="BestBooksDiv">
-          
+          {console.log("Books",books)}
           <Carousel fade style={{width:"900px", height:"300px", border:"1px solid black", background:"black", color:"white",textAlign:"center"}}>
         {books.data.map(arr =>{
+          return(
         <Carousel.Item>
-            <h2>{arr.Title}</h2>
+         
+            <h2>{arr.title}</h2>
             <p>{arr.description}</p>
             <span>{arr.status}</span>
+            
         </Carousel.Item>
+          )
           })
         }
   </Carousel>
