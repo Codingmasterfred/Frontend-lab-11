@@ -9,6 +9,8 @@ class Profile extends Component {
     <p style={{textAlign:"center", width:"100%"}}>Codingmasterfred</p>
     <p style={{textAlign:"center", width:"100%"}}>My favorite color is black</p>
     <hr></hr>
+    <p style={{textAlign:"center", width:"100%"}}>Kris Dotson</p>
+    <p style={{textAlign:"center", width:"100%"}}>My favorite color is red and purple</p>
     </div>
     )
   }
