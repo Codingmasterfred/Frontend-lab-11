@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import axios from "axios";
 import {useEffect} from "react"
+import { Form } from 'react-bootstrap';
+import BookForm from "./BookFormModal"
 
 function BestBooks() {
   // constructor(props) {
@@ -14,6 +16,8 @@ function BestBooks() {
   //   }
   // }
   const [books, setBooks] = useState([])
+  const [showForm, setShowForm] = useState(false); // State for revealing the "New Book" form
+
 
   useEffect(() => {
     // Define an async function
@@ -33,6 +37,9 @@ function BestBooks() {
     componentDidMount();
   }, []); // Empty dependency array to run the effect only once
   // ...
+  const handleAddBookClick = () => {
+    setShowForm(true); // Update state to reveal the "New Book" form
+  };
 
 
 
@@ -46,15 +53,21 @@ function BestBooks() {
 
   return (
     <>
-    
+        <div>
+        <button onClick={handleAddBookClick}>Add Book</button>
+      </div>
+
       {books.length != 0 ? (
-        <div style={{ display:"flex", justifyContent:"center",height:"100vh",alignItem:"center"}}>
+     <div style={{ display: "flex", alignItems: "center", height: "100vh", border: "1px solid black", height: "400px", marginBottom: "40px", justifyContent: showForm === false ? "center" : "space-between" }}>
+
+
+
           <div style={{ width:"900px"}} id="BestBooksDiv">
           {console.log("Books",books)}
           <Carousel fade style={{width:"900px", height:"300px", border:"1px solid black", background:"black", color:"white",textAlign:"center"}}>
         {books.data.map(arr =>{
           return(
-        <Carousel.Item>
+            <Carousel.Item>
          
             <h2>{arr.title}</h2>
             <p>{arr.description}</p>
@@ -62,10 +75,11 @@ function BestBooks() {
             
         </Carousel.Item>
           )
-          })
-        }
+        })
+      }
   </Carousel>
       </div>
+      <BookForm showForm={showForm}/>
       </div>
         
       )
