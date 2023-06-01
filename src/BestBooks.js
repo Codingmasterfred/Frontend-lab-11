@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect } from "react"
 import { Form } from 'react-bootstrap';
 import BookForm from "./BookFormModal"
+import Modalform from "./editModalForm"
 
 function BestBooks() {
   // constructor(props) {
@@ -21,11 +22,13 @@ function BestBooks() {
   const [description, descriptionchange] = useState("")
   const [status, statuschange] = useState("")
   const [click, clickfunction] = useState(false)
+  const [currenteditbook,currenteditbookfunction] = useState(null)
   const [editbook,editingbook] = useState({
     title:"",
     description:"",
     status:""
   })
+  const [modalshow,modalshowfunction] = useState(false)
 
 
   useEffect(() => {
@@ -58,11 +61,36 @@ function BestBooks() {
  
   
   async function Delete(id){
-   let DeleteData = await axios.delete(`http://localhost:3001/books/${id}`)
-   setBooks(DeleteData)
+    let DeleteData = await axios.delete(`http://localhost:3001/books/${id}`)
+    setBooks(DeleteData)
+    
+  }
+  function edit(id, title, description, status){
 
-}
+    modalshowfunction(true);
+    currenteditbookfunction(id);
+    titlechange(title);
+    descriptionchange(description);
+    statuschange(status);
+  }
+  async function savechanges(id, title, description, status) {
+    try {
+      let editBooks = await axios.put(`http://localhost:3001/books/${id}`, {
+        title: title,
+        description: description,
+        status: status,
+        id:currenteditbook
 
+      });
+  
+      if (editBooks.status === 200) {
+        setBooks(editBooks);
+      }
+  
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 
 
@@ -95,15 +123,18 @@ return (
 
                   <h2>{arr.title}</h2>
                   <p>{arr.description}</p>
+                  
                   <span>{arr.status}</span>
                   <button id="delete" onClick={()=>{Delete(arr._id)}}>Delete it</button>
+                  <button style={{marginTop:"10px"}} onClick={()=>edit(arr._id,arr.title,arr.description,arr.status)}>edit book</button>
                 </Carousel.Item>
               )
             })
             }
           </Carousel>
         </div>
-        <BookForm showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks}/>
+        <BookForm currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks}/>
+          {modalshow === true ?<Modalform currenteditbook={currenteditbook} savechanges={savechanges} modalshowfunction={modalshowfunction} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks}/> : <></>}
       </div>
 
     )
@@ -113,9 +144,9 @@ return (
           <p>Book Carousel coming soon</p>
         </div>
       )}
-
+ 
   </>
 )
 }
 
-export default BestBooks;
+export default BestBooks
