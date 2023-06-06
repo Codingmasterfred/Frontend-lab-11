@@ -9,11 +9,41 @@ import {
   Route
 } from "react-router-dom";
 import About from "./About"
+import {useAuth0} from "@auth0/auth0-react"
 
-class App extends React.Component {
-  render() {
+function App() {
+
+const {
+  loginWithPopup,
+  loginWithRedirect,
+  logout,
+  user,
+  isAuthenticated,
+} = useAuth0()
+  
+ 
     return (
       <div>
+        <div>
+          <h1>Auth0 authentication</h1>
+          <ul>
+            <li>
+              <button onClick={loginWithPopup}>Login with popup</button>
+            </li>
+            <li>
+            <button onClick={loginWithRedirect}>login with Redirect</button>
+            </li>
+            <li>
+            <button onClick={logout}>Logout</button>
+            </li>
+          </ul>
+          <h3>User is { isAuthenticated ? "logged in" : "Not Logged in"}</h3>
+          {isAuthenticated && (
+            <pre style={{textAlign:"start"}}>
+              {JSON.stringify(user, null, 2)}
+            </pre>
+          )}
+        </div>
   <Router>
       <Header />
       <Routes>
@@ -34,7 +64,6 @@ class App extends React.Component {
       </div>
       )
     }
-  }
   
   export default App;
   
