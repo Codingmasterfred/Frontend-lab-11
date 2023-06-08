@@ -19,7 +19,7 @@ const {
   logout,
   user,
   isAuthenticated,
-  
+  getAccessTokenSilenty
 } = useAuth0()
   
 
@@ -51,7 +51,12 @@ const {
       <Routes>
         <Route 
           exact path="/"
-          element={<BestBooks />}
+          element={<BestBooks  loginWithPopup={loginWithPopup}
+            loginWithRedirect={loginWithRedirect}
+            logout={logout}
+            user={user}
+            isAuthenticated={isAuthenticated}
+            getAccessTokenSilenty={getAccessTokenSilenty}/>}
           >
         </Route>
         {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}

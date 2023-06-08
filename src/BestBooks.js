@@ -8,14 +8,17 @@ import { useEffect } from "react"
 import { Form } from 'react-bootstrap';
 import BookForm from "./BookFormModal"
 import Modalform from "./editModalForm"
+import {useAuth0} from "@auth0/auth0-react"
 
-function BestBooks() {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     books: []
-  //   }
-  // }
+function BestBooks(props) {
+ const {loginWithPopup,
+  loginWithRedirect,
+  logout,
+  user,
+  isAuthenticated,
+  getAccessTokenSilently
+} = useAuth0()
+
   const [books, setBooks] = useState([])
   const [showForm, setShowForm] = useState(false); // State for revealing the "New Book" form
   const [title, titlechange] = useState("")
@@ -36,7 +39,11 @@ function BestBooks() {
 
     async function componentDidMount() {
       try {
-        let BookData = await axios.get("https://backendbooks.onrender.com/books");
+        let accessToken = await getAccessTokenSilently()
+        let headers = {
+          Authorization: `Bearer ${accessToken}`
+        }
+        let BookData = await axios.get("https://backendbooks.onrender.com/books",{ headers: headers } );
         console.log("BookData", BookData.data)
         setBooks(BookData)
 
@@ -51,6 +58,7 @@ function BestBooks() {
   // ...
   const handleAddBookClick = () => {
     setShowForm(true); // Update state to reveal the "New Book" form
+    console.log("hi")
   };
 
 
@@ -61,7 +69,11 @@ function BestBooks() {
  
   
   async function Delete(id){
-    let DeleteData = await axios.delete(`https://backendbooks.onrender.com/books/${id}`)
+    let accessToken = await getAccessTokenSilently()
+    let headers = {
+      Authorization: `Bearer ${accessToken}`
+    }
+    let DeleteData = await axios.delete(`https://backendbooks.onrender.com/books/${id}`, { headers: headers } )
     setBooks(DeleteData)
     
   }
@@ -75,13 +87,18 @@ function BestBooks() {
   }
   async function savechanges(id, title, description, status) {
     try {
+      let accessToken = await getAccessTokenSilently()
+      let headers = {
+        Authorization: `Bearer ${accessToken}`
+      }
       let editBooks = await axios.put(`https://backendbooks.onrender.com/books/${id}`, {
         title: title,
         description: description,
         status: status,
         id:currenteditbook
+      
 
-      });
+      },{ headers: headers } );
   
       if (editBooks.status === 200) {
         setBooks(editBooks);
@@ -133,7 +150,7 @@ return (
             }
           </Carousel>
         </div>
-        <BookForm currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks}/>
+        <BookForm getAccessTokenSilently={props.getAccessTokenSilently} currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks}/>
           {modalshow === true ?<Modalform currenteditbook={currenteditbook} savechanges={savechanges} modalshowfunction={modalshowfunction} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks}/> : <></>}
       </div>
 
