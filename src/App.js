@@ -19,8 +19,10 @@ const {
   logout,
   user,
   isAuthenticated,
+  
 } = useAuth0()
   
+
  
     return (
       <div>

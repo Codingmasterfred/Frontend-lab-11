@@ -36,7 +36,7 @@ function BestBooks() {
 
     async function componentDidMount() {
       try {
-        let BookData = await axios.get("http://localhost:3001/books");
+        let BookData = await axios.get("https://backendbooks.onrender.com/books");
         console.log("BookData", BookData.data)
         setBooks(BookData)
 
@@ -61,7 +61,7 @@ function BestBooks() {
  
   
   async function Delete(id){
-    let DeleteData = await axios.delete(`http://localhost:3001/books/${id}`)
+    let DeleteData = await axios.delete(`https://backendbooks.onrender.com/books/${id}`)
     setBooks(DeleteData)
     
   }
@@ -75,7 +75,7 @@ function BestBooks() {
   }
   async function savechanges(id, title, description, status) {
     try {
-      let editBooks = await axios.put(`http://localhost:3001/books/${id}`, {
+      let editBooks = await axios.put(`https://backendbooks.onrender.com//books/${id}`, {
         title: title,
         description: description,
         status: status,
