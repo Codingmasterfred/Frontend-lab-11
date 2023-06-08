@@ -75,7 +75,7 @@ function BestBooks() {
   }
   async function savechanges(id, title, description, status) {
     try {
-      let editBooks = await axios.put(`https://backendbooks.onrender.com//books/${id}`, {
+      let editBooks = await axios.put(`https://backendbooks.onrender.com/books/${id}`, {
         title: title,
         description: description,
         status: status,
