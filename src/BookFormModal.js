@@ -60,7 +60,7 @@ async function onSubmitFunction() {
           status: props.status,
          
           
-        }, { headers: headers } );
+        });
         props.setBooks(response)
   
 

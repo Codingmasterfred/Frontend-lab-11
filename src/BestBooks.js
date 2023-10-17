@@ -92,7 +92,7 @@ function BestBooks(props) {
         id:currenteditbook
       
 
-      },{ headers: headers } );
+      } );
   
       if (editBooks.status === 200) {
         setBooks(editBooks);
