@@ -4,11 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
+import {useAuth0} from "@auth0/auth0-react"
 
 
 function BookForm(props) {
 
-   
+    const { getAccessTokenSilently } = useAuth0()
 
     function onchangefunctionTitle(event) {
         props.titlechange(event.target.value)
@@ -51,13 +52,15 @@ function BookForm(props) {
 
 async function onSubmitFunction() {
     try {
+
         const response = await axios.post('https://backend-lab-11.onrender.com/books', {
+
           title: props.title,
           description: props.description,
           status: props.status,
          
           
-        });
+        }, { headers: headers } );
         props.setBooks(response)
   
 
@@ -71,7 +74,7 @@ async function onSubmitFunction() {
         // Handle the error
     }
 };
-
+console.log(props.showForm)
 return (
 
         props.showForm === true && (
