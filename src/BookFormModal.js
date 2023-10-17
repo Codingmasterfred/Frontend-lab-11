@@ -52,11 +52,9 @@ function BookForm(props) {
 
 async function onSubmitFunction() {
     try {
-        let accessToken = await getAccessTokenSilently()
-        let headers = {
-            Authorization: `Bearer ${accessToken}`
-          }
-        const response = await axios.post('https://backendbooks.onrender.com/books',{
+
+        const response = await axios.post('https://backend-lab-11.onrender.com/books', {
+
           title: props.title,
           description: props.description,
           status: props.status,

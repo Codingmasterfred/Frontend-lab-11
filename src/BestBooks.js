@@ -39,11 +39,9 @@ function BestBooks(props) {
 
     async function componentDidMount() {
       try {
-        let accessToken = await getAccessTokenSilently()
-        let headers = {
-          Authorization: `Bearer ${accessToken}`
-        }
-        let BookData = await axios.get("https://backendbooks.onrender.com/books",{ headers: headers } );
+
+        let BookData = await axios.get("https://backend-lab-11.onrender.com/books");
+
         console.log("BookData", BookData.data)
         setBooks(BookData)
 
@@ -69,11 +67,9 @@ function BestBooks(props) {
  
   
   async function Delete(id){
-    let accessToken = await getAccessTokenSilently()
-    let headers = {
-      Authorization: `Bearer ${accessToken}`
-    }
-    let DeleteData = await axios.delete(`https://backendbooks.onrender.com/books/${id}`, { headers: headers } )
+
+    let DeleteData = await axios.delete(`https://backend-lab-11.onrender.com/books/${id}`)
+
     setBooks(DeleteData)
     
   }
@@ -87,11 +83,9 @@ function BestBooks(props) {
   }
   async function savechanges(id, title, description, status) {
     try {
-      let accessToken = await getAccessTokenSilently()
-      let headers = {
-        Authorization: `Bearer ${accessToken}`
-      }
-      let editBooks = await axios.put(`https://backendbooks.onrender.com/books/${id}`, {
+
+      let editBooks = await axios.put(`https://backend-lab-11.onrender.com/books/${id}`, {
+
         title: title,
         description: description,
         status: status,
