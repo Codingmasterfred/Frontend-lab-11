@@ -77,7 +77,7 @@ function BestBooks(props) {
     modalshowfunction(true);
     while (id === undefined) {
       id = books.data[1]._id
-      title =  books.data[1].title
+      title = books.data[1].title
       description = books.data[1].description
       status = books.data[1].status
     }
@@ -118,49 +118,49 @@ function BestBooks(props) {
   if (showForm || modalshow) {
     // Scroll to the top
     window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
+      top: 0,
+      behavior: 'smooth',
     });
-    
+
     // Prevent scrolling when the keyboard is open
     document.body.addEventListener('touchmove', preventScroll, { passive: false });
 
-    
-//     // Add event listeners to adjust scrolling when the keyboard opens
-//     document.querySelectorAll('.FormInput').forEach((input) => {
-//       // input.addEventListener('touchmove', preventScroll, { passive: false });
-//         input.addEventListener('focus', handleInputFocus);
-//         input.addEventListener('blur', handleInputBlur);
-//     });
-// } else {
-//     // Remove event listeners
-//     document.body.removeEventListener('touchmove', preventScroll, { passive: false });
-//     document.querySelectorAll('.FormInput').forEach((input) => {
-//         input.removeEventListener('focus', handleInputFocus);
-//         input.removeEventListener('blur', handleInputBlur);
-//     });
-// }
 
-// function preventScroll(event) {
-//     event.preventDefault();
-// }
+    //     // Add event listeners to adjust scrolling when the keyboard opens
+    //     document.querySelectorAll('.FormInput').forEach((input) => {
+    //       // input.addEventListener('touchmove', preventScroll, { passive: false });
+    //         input.addEventListener('focus', handleInputFocus);
+    //         input.addEventListener('blur', handleInputBlur);
+    //     });
+    // } else {
+    //     // Remove event listeners
+    //     document.body.removeEventListener('touchmove', preventScroll, { passive: false });
+    //     document.querySelectorAll('.FormInput').forEach((input) => {
+    //         input.removeEventListener('focus', handleInputFocus);
+    //         input.removeEventListener('blur', handleInputBlur);
+    //     });
+    // }
 
-// function handleInputFocus(event) {
-//     // When an input field is focused, scroll to ensure it's visible
-//     const input = event.target;
-//     input.scrollIntoView({ behavior: 'smooth', block: 'bottom' });
-// }
+    // function preventScroll(event) {
+    //     event.preventDefault();
+    // }
 
-// function handleInputBlur(event) {
-//     // When an input field is blurred (keyboard closed), scroll back to the top
-//     window.scrollTo({ top: 0, behavior: 'smooth' });
-// }
+    // function handleInputFocus(event) {
+    //     // When an input field is focused, scroll to ensure it's visible
+    //     const input = event.target;
+    //     input.scrollIntoView({ behavior: 'smooth', block: 'bottom' });
+    // }
 
+    // function handleInputBlur(event) {
+    //     // When an input field is blurred (keyboard closed), scroll back to the top
+    //     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // }
+
+  }
   function SelectWorks(index) {
     const selectedBook = books.data[index];
     console.log("Selection works:", selectedBook);
     setCurrentItemDisplaying(selectedBook)
-  }
   }
 
 
@@ -174,38 +174,38 @@ function BestBooks(props) {
   /* TODO: render all the books in a Carousel */
 
   return (
-<div id="primaryBestbookDiv" style={{ overflow: showForm === true ? "hidden" : "auto" }}>
+    <div id="primaryBestbookDiv" style={{ overflow: showForm === true ? "hidden" : "auto" }}>
 
       {books.length != 0 ? (
         <div id="BooksShownParent" style={{ justifyContent: showForm === false ? "center" : "space-between" }}>
-            {console.log("Books", books)}
-      <div id="AddStoryDiv" >
-        <button id="AddStoryButton" onClick={handleAddBookClick} className="Buttons">Add Book</button>
-      </div>
-            <div id="carouselContainer" >
-              <Carousel id="carousel" onSelect={SelectWorks} interval={null} >
-                {books.data.map(arr => {
-                  return (
-                    <Carousel.Item id="CarouselItem" style={{color:"white"}} >
+          {console.log("Books", books)}
+          <div id="AddStoryDiv" >
+            <button id="AddStoryButton" onClick={handleAddBookClick} className="Buttons">Add Book</button>
+          </div>
+          <div id="carouselContainer" >
+            <Carousel id="carousel" onSelect={SelectWorks} interval={null} >
+              {books.data.map(arr => {
+                return (
+                  <Carousel.Item id="CarouselItem" style={{ color: "white" }} >
 
-                      <h2 className="carouselItemChild" >{arr.title}</h2>
-                      <p id="PInCarousel" className="carouselItemChild" > {arr.description}</p>
-                      <div id="DivForInsideButton" className="carouselItemChild displayInside" >
-                        <button id="insideDeleteButton" className="Buttons InsideButtons displayInside"  onClick={() => { Delete(arr._id) }}>Delete Story</button>
-                        <button id="insideUpdateButton" className="Buttons InsideButtons displayInside" onClick={() => edit(arr._id, arr.title, arr.description, arr.status)}>Edit Story</button>
-                      </div>
-                    </Carousel.Item>
-                  )
-                })
-                }
-              </Carousel>
-            </div>
-            <div id="outsideContainer" className="displayOutside">
-              <button  id="OutsideDeleteButton" className="Buttons OutsideButtons displayOutside" onClick={() => { Delete(CurrentItemDisplaying._id) }}>Delete Story</button>
-              <button id="OutsideUpdateButton" className="Buttons OutsideButtons displayOutside" style={{ marginTop: "10px", marginBottom: "10", margin: "auto", textAlign: "center", padding: "15px" }} onClick={() => edit(CurrentItemDisplaying._id, CurrentItemDisplaying.title, CurrentItemDisplaying.description, CurrentItemDisplaying.status)}>Edit Story</button>
+                    <h2 className="carouselItemChild" >{arr.title}</h2>
+                    <p id="PInCarousel" className="carouselItemChild" > {arr.description}</p>
+                    <div id="DivForInsideButton" className="carouselItemChild displayInside" >
+                      <button id="insideDeleteButton" className="Buttons InsideButtons displayInside" onClick={() => { Delete(arr._id) }}>Delete Story</button>
+                      <button id="insideUpdateButton" className="Buttons InsideButtons displayInside" onClick={() => edit(arr._id, arr.title, arr.description, arr.status)}>Edit Story</button>
+                    </div>
+                  </Carousel.Item>
+                )
+              })
+              }
+            </Carousel>
+          </div>
+          <div id="outsideContainer" className="displayOutside">
+            <button id="OutsideDeleteButton" className="Buttons OutsideButtons displayOutside" onClick={() => { Delete(CurrentItemDisplaying._id) }}>Delete Story</button>
+            <button id="OutsideUpdateButton" className="Buttons OutsideButtons displayOutside" style={{ marginTop: "10px", marginBottom: "10", margin: "auto", textAlign: "center", padding: "15px" }} onClick={() => edit(CurrentItemDisplaying._id, CurrentItemDisplaying.title, CurrentItemDisplaying.description, CurrentItemDisplaying.status)}>Edit Story</button>
           </div >
           <BookForm setShowForm={setShowForm} getAccessTokenSilently={props.getAccessTokenSilently} currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
-           <Modalform modalshowfunction={modalshowfunction} modalshow={modalshow} currenteditbook={currenteditbook} savechanges={savechanges} modalshowfunction={modalshowfunction} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
+          <Modalform modalshowfunction={modalshowfunction} modalshow={modalshow} currenteditbook={currenteditbook} savechanges={savechanges} modalshowfunction={modalshowfunction} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
         </div>
 
       )
