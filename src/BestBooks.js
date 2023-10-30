@@ -145,16 +145,16 @@ function BestBooks(props) {
 <div id="primaryBestbookDiv" style={{ overflow: showForm === true || modalshow === true ? "hidden" : "default" }}>
 
       {books.length != 0 ? (
-        <div id="BooksShownParent" style={{ justifyContent: showForm === false ? "center" : "space-between" }}>
+        <div id="BooksShownParent" style={{overflow:"hidden", justifyContent: showForm === false ? "center" : "space-between" }}>
             {console.log("Books", books)}
       <div id="AddStoryDiv" >
         <button id="AddStoryButton" onClick={handleAddBookClick} className="Buttons">Add Book</button>
       </div>
             <div id="carouselContainer" >
-              <Carousel id="carousel" onSelect={SelectWorks} interval={null} >
+              <Carousel style={{overflow:"hidden",}} id="carousel" onSelect={SelectWorks} interval={null} >
                 {books.data.map(arr => {
                   return (
-                    <Carousel.Item id="CarouselItem" style={{color:"white"}} >
+                    <Carousel.Item id="CarouselItem" style={{color:"white",overflow:"hidden",}} >
 
                       <h2 className="carouselItemChild" >{arr.title}</h2>
                       <p id="PInCarousel" className="carouselItemChild" > {arr.description}</p>
