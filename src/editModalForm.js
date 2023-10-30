@@ -46,7 +46,7 @@ function Modalform(props) {
     return (
 
         props.modalshow === true && (
-            <div style={{ zIndex: "4", display: "flex", border: "1px solid black", justifyContent: "center", height: "101%", alignItems: "center", width: "100%", backgroundColor: "black", color: "white", position: "absolute", top: "0" }}>
+            <div style={{overflow:"hidden", zIndex: "4", display: "flex", border: "1px solid black", justifyContent: "center", height: "101%", alignItems: "center", width: "100%", backgroundColor: "black", color: "white", position: "absolute", top: "0" }}>
                 {/* Render your "New Book" form component here */}
                 <div style={{ height: "100%", backgroundColor: "black", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%" }}>
                     <Form id="Form" style={{ padding: "80px", minWidth: "300px", height: "90%", width: "90%", backgroundColor: "black", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }} onSubmit={handleSub}>
