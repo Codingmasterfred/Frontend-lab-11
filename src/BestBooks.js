@@ -142,7 +142,7 @@ function BestBooks(props) {
   /* TODO: render all the books in a Carousel */
 
   return (
-<div id="primaryBestbookDiv" style={{ overflow: showForm === true || modalshow === true ? "hidden" : "auto" }}>
+<div id="primaryBestbookDiv" className={`primaryBestbookDiv ${showForm || modalshow ? 'hide-overflow' : ''}`}>
 
       {books.length != 0 ? (
         <div id="BooksShownParent" style={{ justifyContent: showForm === false ? "center" : "space-between" }}>
