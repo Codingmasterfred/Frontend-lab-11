@@ -122,6 +122,7 @@ function BestBooks(props) {
         top: 0,
         behavior: 'smooth',
       });
+      setGoToTop(false)
     }
     // Add an event listener to the entire document to prevent scrolling
     document.addEventListener('touchmove', preventScroll, { passive: false });
