@@ -115,22 +115,41 @@ function BestBooks(props) {
     }
   }, []);
 
+  const preventScroll = (event) => {
+    event.preventDefault();
+  };
+
   useEffect(() => {
-  if (showForm || modalshow) {
-    window.scrollTo({
-   top: 0,
-   behavior: 'smooth',
- });
-   document.body.addEventListener('touchmove', preventScroll, { passive: false });
- } else {
-   document.body.removeEventListener('touchmove', preventScroll, { passive: false });
- }
-}, [showForm,modalshow]);
+    if (showForm || modalshow) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+      document.body.addEventListener('touchmove', preventScroll, { passive: false });
+    } else {
+      document.body.removeEventListener('touchmove', preventScroll, { passive: false });
+    }
+  }, [showForm, modalshow]);
 
+  useEffect(() => {
+    // Handle changes in viewport height, e.g., due to keyboard visibility
+    const handleResize = () => {
+      if (window.innerHeight < window.outerHeight) {
+        // Keyboard is visible
+        document.body.style.overflow = 'auto'; // Enable scrolling
+      } else {
+        // Keyboard is hidden
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      }
+    };
 
- function preventScroll(event) {
-   event.preventDefault();
- }
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Handle initial state
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   function SelectWorks(index) {
     const selectedBook = books.data[index];
