@@ -221,16 +221,17 @@ html, body, #primaryBestbookDiv, #BooksShownParent,#carouselContainer {
 
 .hide-overflow {
     overflow: hidden;
-    
   }
 @media (max-width: 768px) {
 
     #navbarDiv{
+        height: 100%;
         width:100%;
         flex-direction: column;
     }
 
     #NavbarUl{
+        height: 100%;
         text-align: center;
         width:100%;
     
@@ -245,14 +246,13 @@ html, body, #primaryBestbookDiv, #BooksShownParent,#carouselContainer {
         border-image-slice: 150; /* Set to 1 to prevent repeating */
         border-image-width: 4; /* You can adjust this value as needed */
         min-height:60%;
-        z-index: 2;
+       
         margin-bottom:0px
     }
 
     #Form{
         min-height: fit-content;
         min-width:200px;
-       
         border-image-width: 0px;
        padding: 0%;
        border-image-repeat:round
@@ -276,6 +276,10 @@ html, body, #primaryBestbookDiv, #BooksShownParent,#carouselContainer {
         width:100%
     }
 
+    .Buttons{
+        margin:0 auto;
+    }
+
     #PInCarousel::-webkit-scrollbar {
         width: 0px; /* Set the width of the scrollbar */
       }
@@ -283,12 +287,16 @@ html, body, #primaryBestbookDiv, #BooksShownParent,#carouselContainer {
         align-items: flex-start;
         height:50%;
         width:100%;
-      
+        margin:20px 0;
+       
+
     }
 
     #AddStoryButton{
         width:90%;
-        padding:10px 0 10px 0;
+       height:100%;
+       padding: 0%;
+      
     }
     
    .displayInside {
@@ -340,6 +348,16 @@ html, body, #primaryBestbookDiv, #BooksShownParent,#carouselContainer {
 
     #Form button{
         padding: 4%;
+      
+    }
+    .Buttons{
+        margin:0 auto;
+    }
+
+    #AddStoryButton{
+        margin-top: 45px;
+        width:90%;
+       height:70px;
       
     }
 
