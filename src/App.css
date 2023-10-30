@@ -221,6 +221,7 @@ html, body, #primaryBestbookDiv, #BooksShownParent,#carouselContainer {
 
 .hide-overflow {
     overflow: hidden;
+    overscroll-behavior-y: none;
   }
 @media (max-width: 768px) {
 

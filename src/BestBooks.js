@@ -126,6 +126,7 @@ function BestBooks(props) {
       top: 0,
       behavior: 'smooth',})
     document.body.classList.add("hide-overflow");
+    
   } else {
     document.body.classList.remove("hide-overflow");
   }
