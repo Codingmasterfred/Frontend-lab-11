@@ -1,113 +1,70 @@
 import React from 'react';
-import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Form } from 'react-bootstrap';
-import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 function Modalform(props) {
 
 
-    
+
     function onchangefunctionTitle(event) {
         props.titlechange(event.target.value)
     };
-    
-    
+
+
     function onchangefunctionDescription(event) {
-  
+
         props.descriptionchange(event.target.value)
     };
 
 
     function onchangefunctionStatus(event) {
-       
+
         props.statuschange(event.target.value)
     };
 
     const handleSub = (event) => {
         event.preventDefault()
         console.log("Submitted")
-    
-        props.savechanges(props.currenteditbook, props.title, props.description, props.status)
 
-
-
-        // try {
-        //     const response = await axios.post('/books', formData);
-        //     const newBook = response.data;
-        //     // Pass the new book up to the BestBooks component
-        //     props.onAddBook(newBook);
-        //     // Reset the form data
-        //     setformData({
-        //         title: '',
-        //         description: '',
-        //         status: 'Published'
-        //     });
-        // } catch (error) {
-        //     console.error('Error saving book:', error);
-        // }
+        props.savechanges(props.currenteditbook, props.title, props.description, "Published")
+        props.modalshowfunction(false)
     };
-   
 
 
-    function change(){
+
+    function change() {
         props.modalshowfunction(false)
     }
 
-   
+
 
 
 
     return (
 
-<div
-className="modal show"
-style={{ display:  'block', position: 'initial', height:"100vh", width:"100vw"}}
->
-<Modal.Dialog>
-  <Modal.Header closeButton onClick={change}>
-    <Modal.Title>Modal title</Modal.Title>
-  </Modal.Header>
+        props.modalshow === true && (
+            <div style={{ zIndex: "4", display: "flex", border: "1px solid black", justifyContent: "center", height: "101%", alignItems: "center", width: "100%", backgroundColor: "black", color: "white", position: "absolute", top: "0" }}>
+                {/* Render your "New Book" form component here */}
+                <div style={{ height: "100%", backgroundColor: "black", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%" }}>
+                    <Form id="Form" style={{ padding: "80px", minWidth: "300px", height: "90%", width: "90%", backgroundColor: "black", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }} onSubmit={handleSub}>
+                        <Form.Group style={{ width: "90%" }} className="mb-3 FormInput">
+                            <Form.Label style={{ width: "100%" }}>Title</Form.Label>
+                            <Form.Control style={{ width: "100%" }} placeholder="Title" id="Title" name="Title" value={props.title} onChange={onchangefunctionTitle} required />
 
-  <Modal.Body>
+                        </Form.Group>
+                        <Form.Group style={{ width: "90%", height: "50%" }} className="mb-3 FormInput">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control as="textarea" style={{ height: "100%" }} placeholder="Description" id="Description" name="Description" value={props.description} onChange={onchangefunctionDescription} required />
+                        </Form.Group>
 
-        <Form style={{ width: "300px", borderRadius: "10%", padding: "30px", backgroundColor: "black"}} >
-            <Form.Group className="mb-3">
-                <Form.Label>Title</Form.Label>
-                <Form.Control placeholder="Title" id="Title" name="Title" value={props.title} onChange={onchangefunctionTitle} required />
-
-            </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Label>Description</Form.Label>
-                <Form.Control placeholder="Description" id="Description" name="Description" value={props.description} onChange={onchangefunctionDescription} required />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label id="Status" name="Status" >Status</Form.Label>
-                <Form.Select onChange={onchangefunctionStatus} required value={props.status} >
-                    <option>Published</option>
-                    <option>Unpublished</option>
-                </Form.Select>
-            </Form.Group>
-        </Form>
-   
-  </Modal.Body>
-
-  <Modal.Footer>
-    <Button variant="secondary"  onClick={change}>Close</Button>
-    <Button variant="primary" onClick={handleSub}>Save changes</Button>
-  </Modal.Footer>
-</Modal.Dialog>
-</div>
-
-
-
-
-
-
+                        <button className="Buttons" type="submit" style={{ marginTop: "40px" }} onClick={handleSub}>Submit</button>
+                    </Form>
+                </div>
+            </div>
+        )
     )
-
 }
 export default Modalform

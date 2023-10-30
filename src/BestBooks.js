@@ -1,23 +1,18 @@
 import React from 'react';
+import "./App.css"
 import { useState } from "react";
 import { Carousel } from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+
 import axios from "axios";
 import { useEffect } from "react"
 import { Form } from 'react-bootstrap';
 import BookForm from "./BookFormModal"
 import Modalform from "./editModalForm"
-import {useAuth0} from "@auth0/auth0-react"
+import { useAuth0 } from "@auth0/auth0-react"
 
 function BestBooks(props) {
- const {loginWithPopup,
-  loginWithRedirect,
-  logout,
-  user,
-  isAuthenticated,
-  getAccessTokenSilently
-} = useAuth0()
+
 
   const [books, setBooks] = useState([])
   const [showForm, setShowForm] = useState(false); // State for revealing the "New Book" form
@@ -25,13 +20,14 @@ function BestBooks(props) {
   const [description, descriptionchange] = useState("")
   const [status, statuschange] = useState("")
   const [click, clickfunction] = useState(false)
-  const [currenteditbook,currenteditbookfunction] = useState(null)
-  const [editbook,editingbook] = useState({
-    title:"",
-    description:"",
-    status:""
+  const [currenteditbook, currenteditbookfunction] = useState(null)
+  const [editbook, editingbook] = useState({
+    title: "",
+    description: "",
+    status: ""
   })
-  const [modalshow,modalshowfunction] = useState(false)
+  const [modalshow, modalshowfunction] = useState(false)
+  const [CurrentItemDisplaying, setCurrentItemDisplaying] = useState({})
 
 
   useEffect(() => {
@@ -64,18 +60,27 @@ function BestBooks(props) {
   console.log("description", description)
   console.log("status", status)
 
- 
-  
-  async function Delete(id){
 
+
+  async function Delete(id) {
+
+    while (id === undefined) {
+      id = books.data[1]._id
+    }
+    console.log(id, "final")
     let DeleteData = await axios.delete(`https://backend-lab-11.onrender.com/books/${id}`)
 
     setBooks(DeleteData)
-    
-  }
-  function edit(id, title, description, status){
 
+  }
+  function edit(id, title, description, status) {
     modalshowfunction(true);
+    while (id === undefined) {
+      id = books.data[1]._id
+      title =  books.data[1].title
+      description = books.data[1].description
+      status = books.data[1].status
+    }
     currenteditbookfunction(id);
     titlechange(title);
     descriptionchange(description);
@@ -89,75 +94,97 @@ function BestBooks(props) {
         title: title,
         description: description,
         status: status,
-        id:currenteditbook
-      
+        id: currenteditbook
 
-      } );
-  
+
+      });
+
       if (editBooks.status === 200) {
         setBooks(editBooks);
       }
-  
+
     } catch (error) {
       console.error(error);
     }
+  }
+
+  useEffect(() => {
+    // Call SelectWorks for the first item when the component mounts
+    if (books && books.data && books.data.length > 0) {
+      SelectWorks(0);
+    }
+  }, []);
+
+  function SelectWorks(index) {
+    const selectedBook = books.data[index];
+    console.log("Selection works:", selectedBook);
+    setCurrentItemDisplaying(selectedBook)
+  }
+
+  if (showForm || modalshow) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',})
+    document.body.classList.add("hide-overflow");
+  } else {
+    document.body.classList.remove("hide-overflow");
   }
 
 
 
 
 
-
-/* TODO: Make a GET request to your API to fetch all the books from the database  */
-
-
-
-/* TODO: render all the books in a Carousel */
-
-return (
-  <>
-    <div>
-      <button onClick={handleAddBookClick}>Add Book</button>
-    </div>
-
-    {books.length != 0 ? (
-      <div style={{ display: "flex", alignItems: "center", height: "100vh", border: "1px solid black", height: "400px", marginBottom: "40px", justifyContent: showForm === false ? "center" : "space-between" }}>
+  /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
 
 
-        <div style={{ width: "900px" }} id="BestBooksDiv">
-          {console.log("Books", books)}
-          <Carousel fade style={{ width: "900px", height: "300px", border: "1px solid black", background: "black", color: "white", textAlign: "center" }}>
-            {books.data.map(arr => {
-              return (
-                <Carousel.Item>
+  /* TODO: render all the books in a Carousel */
 
-                  <h2>{arr.title}</h2>
-                  <p>{arr.description}</p>
-                  
-                  <span>{arr.status}</span>
-                  <button id="delete" onClick={()=>{Delete(arr._id)}}>Delete it</button>
-                  <button style={{marginTop:"10px"}} onClick={()=>edit(arr._id,arr.title,arr.description,arr.status)}>edit book</button>
-                </Carousel.Item>
-              )
-            })
-            }
-          </Carousel>
-        </div>
-        <BookForm getAccessTokenSilently={props.getAccessTokenSilently} currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks}/>
-          {modalshow === true ?<Modalform currenteditbook={currenteditbook} savechanges={savechanges} modalshowfunction={modalshowfunction} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks}/> : <></>}
+  return (
+<div id="primaryBestbookDiv" style={{ overflow: showForm === true ? "hidden" : "auto" }}>
+
+      {books.length != 0 ? (
+        <div id="BooksShownParent" style={{ justifyContent: showForm === false ? "center" : "space-between" }}>
+            {console.log("Books", books)}
+      <div id="AddStoryDiv" >
+        <button id="AddStoryButton" onClick={handleAddBookClick} className="Buttons">Add Book</button>
       </div>
+            <div id="carouselContainer" >
+              <Carousel id="carousel" onSelect={SelectWorks} interval={null} >
+                {books.data.map(arr => {
+                  return (
+                    <Carousel.Item id="CarouselItem" style={{color:"white"}} >
 
-    )
-      : (
-        <div>
-          <h3>No Books Found :(</h3>
-          <p>Book Carousel coming soon</p>
+                      <h2 className="carouselItemChild" >{arr.title}</h2>
+                      <p id="PInCarousel" className="carouselItemChild" > {arr.description}</p>
+                      <div id="DivForInsideButton" className="carouselItemChild displayInside" >
+                        <button id="insideDeleteButton" className="Buttons InsideButtons displayInside"  onClick={() => { Delete(arr._id) }}>Delete Story</button>
+                        <button id="insideUpdateButton" className="Buttons InsideButtons displayInside" onClick={() => edit(arr._id, arr.title, arr.description, arr.status)}>Edit Story</button>
+                      </div>
+                    </Carousel.Item>
+                  )
+                })
+                }
+              </Carousel>
+            </div>
+            <div id="outsideContainer" className="displayOutside">
+              <button  id="OutsideDeleteButton" className="Buttons OutsideButtons displayOutside" onClick={() => { Delete(CurrentItemDisplaying._id) }}>Delete Story</button>
+              <button id="OutsideUpdateButton" className="Buttons OutsideButtons displayOutside" style={{ marginTop: "10px", marginBottom: "10", margin: "auto", textAlign: "center", padding: "15px" }} onClick={() => edit(CurrentItemDisplaying._id, CurrentItemDisplaying.title, CurrentItemDisplaying.description, CurrentItemDisplaying.status)}>Edit Story</button>
+          </div >
+          <BookForm setShowForm={setShowForm} getAccessTokenSilently={props.getAccessTokenSilently} currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
+           <Modalform modalshowfunction={modalshowfunction} modalshow={modalshow} currenteditbook={currenteditbook} savechanges={savechanges} modalshowfunction={modalshowfunction} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
         </div>
-      )}
- 
-  </>
-)
+
+      )
+        : (
+          <div>
+            <h3>No Books Found :(</h3>
+            <p>Book Carousel coming soon</p>
+          </div>
+        )}
+
+    </div>
+  )
 }
 
 export default BestBooks

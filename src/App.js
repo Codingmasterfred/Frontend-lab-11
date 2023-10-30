@@ -25,8 +25,8 @@ const {
 
  
     return (
-      <div>
-        <div>
+      <div style={{}}>
+        {/* <div>
           <h1>Auth0 authentication</h1>
           <ul>
             <li>
@@ -45,7 +45,7 @@ const {
               {JSON.stringify(user, null, 2)}
             </pre>
           )}
-        </div>
+        </div> */}
   <Router>
       <Header />
       <Routes>
@@ -60,13 +60,8 @@ const {
           >
         </Route>
         {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
-        <Route 
-          exact path="/About"
-          element={<About />}
-          >
-        </Route>
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
       </div>
       )
