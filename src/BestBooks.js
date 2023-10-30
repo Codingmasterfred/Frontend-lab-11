@@ -148,7 +148,7 @@ function preventScroll(event) {
 function handleInputFocus(event) {
     // When an input field is focused, scroll to ensure it's visible
     const input = event.target;
-    input.scrollIntoView({ behavior: 'smooth', block: 'top' });
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function handleInputBlur(event) {
