@@ -123,13 +123,17 @@ function BestBooks(props) {
 
   if (showForm || modalshow) {
     window.scrollTo({
-      top: 0,
-      behavior: 'smooth',})
-    document.body.classList.add("hide-overflow");
-    
-  } else {
-    document.body.classList.remove("hide-overflow");
-  }
+   top: 0,
+   behavior: 'smooth',
+ });
+   document.body.addEventListener('touchmove', preventScroll, { passive: false });
+ } else {
+   document.body.removeEventListener('touchmove', preventScroll, { passive: false });
+ }
+ 
+ function preventScroll(event) {
+   event.preventDefault();
+ }
 
 
 
