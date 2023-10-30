@@ -115,41 +115,44 @@ function BestBooks(props) {
     }
   }, []);
 
-  const preventScroll = (event) => {
-    event.preventDefault();
-  };
-
-  useEffect(() => {
-    if (showForm || modalshow) {
-      window.scrollTo({
+  if (showForm || modalshow) {
+    // Scroll to the top
+    window.scrollTo({
         top: 0,
         behavior: 'smooth',
-      });
-      document.body.addEventListener('touchmove', preventScroll, { passive: false });
-    } else {
-      document.body.removeEventListener('touchmove', preventScroll, { passive: false });
-    }
-  }, [showForm, modalshow]);
+    });
+    
+    // Prevent scrolling when the keyboard is open
+    document.body.addEventListener('touchmove', preventScroll, { passive: false });
+    
+    // Add event listeners to adjust scrolling when the keyboard opens
+    document.querySelectorAll('input, textarea').forEach((input) => {
+        input.addEventListener('focus', handleInputFocus);
+        input.addEventListener('blur', handleInputBlur);
+    });
+} else {
+    // Remove event listeners
+    document.body.removeEventListener('touchmove', preventScroll, { passive: false });
+    document.querySelectorAll('input, textarea').forEach((input) => {
+        input.removeEventListener('focus', handleInputFocus);
+        input.removeEventListener('blur', handleInputBlur);
+    });
+}
 
-  useEffect(() => {
-    // Handle changes in viewport height, e.g., due to keyboard visibility
-    const handleResize = () => {
-      if (window.innerHeight < window.outerHeight) {
-        // Keyboard is visible
-        document.body.style.overflow = 'auto'; // Enable scrolling
-      } else {
-        // Keyboard is hidden
-        document.body.style.overflow = 'hidden'; // Prevent scrolling
-      }
-    };
+function preventScroll(event) {
+    event.preventDefault();
+}
 
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Handle initial state
+function handleInputFocus(event) {
+    // When an input field is focused, scroll to ensure it's visible
+    const input = event.target;
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+function handleInputBlur(event) {
+    // When an input field is blurred (keyboard closed), scroll back to the top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
   function SelectWorks(index) {
     const selectedBook = books.data[index];
