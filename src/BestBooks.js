@@ -127,15 +127,15 @@ function BestBooks(props) {
     
     // Add event listeners to adjust scrolling when the keyboard opens
     document.querySelectorAll('input, textarea').forEach((input) => {
-        input.addEventListener('focus', handleInputFocus);
+        // input.addEventListener('focus', handleInputFocus);
         input.addEventListener('blur', handleInputBlur);
     });
 } else {
     // Remove event listeners
     document.body.removeEventListener('touchmove', preventScroll, { passive: false });
     document.querySelectorAll('input, textarea').forEach((input) => {
-        input.removeEventListener('focus', handleInputFocus);
-        input.removeEventListener('blur', handleInputBlur);
+        // input.removeEventListener('focus', handleInputFocus);
+        // input.removeEventListener('blur', handleInputBlur);
     });
 }
 
