@@ -28,7 +28,7 @@ function BestBooks(props) {
   })
   const [modalshow, modalshowfunction] = useState(false)
   const [CurrentItemDisplaying, setCurrentItemDisplaying] = useState({})
-
+  const [GotToTop,setGoToTop] = useState(false)
 
   useEffect(() => {
     // Define an async function
@@ -74,6 +74,7 @@ function BestBooks(props) {
 
   }
   function edit(id, title, description, status) {
+    setGoToTop(true)
     modalshowfunction(true);
     while (id === undefined) {
       id = books.data[1]._id
@@ -116,6 +117,12 @@ function BestBooks(props) {
   }, []);
 
   if (showForm || modalshow) {
+    if(GotToTop){
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
     // Add an event listener to the entire document to prevent scrolling
     document.addEventListener('touchmove', preventScroll, { passive: false });
 
