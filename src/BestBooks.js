@@ -141,7 +141,7 @@ function BestBooks(props) {
   }
   function handleInputBlur(event) {
     // When an input field is blurred (keyboard closed), scroll back to the top
-   setGoToTop(false)
+   setGoToTop(true)
   }
 
   function preventScroll(event) {
