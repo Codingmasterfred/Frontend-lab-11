@@ -130,7 +130,7 @@ function BestBooks(props) {
     // Add event listeners to allow scrolling within specific elements
     document.querySelectorAll('textarea').forEach((textarea) => {
       textarea.addEventListener('touchmove', allowScroll, { passive: true });
-      input.addEventListener('blur', handleInputBlur);
+      textarea.addEventListener('blur', handleInputBlur);
     });
   } else {
     // Remove event listeners when the form is closed
