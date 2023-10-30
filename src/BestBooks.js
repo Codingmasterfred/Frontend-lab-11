@@ -141,9 +141,9 @@ function BestBooks(props) {
     //     });
     // }
 
-    // function preventScroll(event) {
-    //     event.preventDefault();
-    // }
+    function preventScroll(event) {
+        event.preventDefault();
+    }
 
     // function handleInputFocus(event) {
     //     // When an input field is focused, scroll to ensure it's visible
