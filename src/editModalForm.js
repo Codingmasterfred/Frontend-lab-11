@@ -67,7 +67,7 @@ function Modalform(props) {
                                 value={props.description}
                                 onChange={onchangefunctionDescription}
                                 required
-                                className="scroll-prevent"
+                                
                             />
                         </Form.Group>
 
