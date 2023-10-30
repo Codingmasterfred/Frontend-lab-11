@@ -127,7 +127,7 @@ function BestBooks(props) {
     
     // Add event listeners to adjust scrolling when the keyboard opens
     document.querySelectorAll('input, textarea').forEach((input) => {
-        // input.addEventListener('focus', handleInputFocus);
+        input.addEventListener('focus', handleInputFocus);
         input.addEventListener('blur', handleInputBlur);
     });
 } else {
@@ -146,7 +146,7 @@ function preventScroll(event) {
 function handleInputFocus(event) {
     // When an input field is focused, scroll to ensure it's visible
     const input = event.target;
-    input.style.overflow = "hidden"
+    input.scrollIntoView({ behavior: 'smooth', block: 'top' });
 }
 
 function handleInputBlur(event) {
