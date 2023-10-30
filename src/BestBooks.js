@@ -127,7 +127,7 @@ function BestBooks(props) {
 
     
     // Add event listeners to adjust scrolling when the keyboard opens
-    document.querySelectorAll('input, textarea').forEach((input) => {
+    document.querySelectorAll('.FormInput').forEach((input) => {
       // input.addEventListener('touchmove', preventScroll, { passive: false });
         input.addEventListener('focus', handleInputFocus);
         input.addEventListener('blur', handleInputBlur);
@@ -135,7 +135,7 @@ function BestBooks(props) {
 } else {
     // Remove event listeners
     document.body.removeEventListener('touchmove', preventScroll, { passive: false });
-    document.querySelectorAll('input, textarea').forEach((input) => {
+    document.querySelectorAll('.FormInput').forEach((input) => {
         input.removeEventListener('focus', handleInputFocus);
         input.removeEventListener('blur', handleInputBlur);
     });
