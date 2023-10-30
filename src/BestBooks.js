@@ -122,15 +122,15 @@ function BestBooks(props) {
   }
 
   if (showForm || modalshow) {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',})
-    document.body.classList.add("hide-overflow");
-
+    document.body.addEventListener('touchmove', preventScroll, { passive: false });
   } else {
-    document.body.classList.remove("hide-overflow");
+    document.body.removeEventListener('touchmove', preventScroll, { passive: false });
   }
-
+  
+  function preventScroll(event) {
+    event.preventDefault();
+  }
+  
 
 
 
@@ -151,10 +151,10 @@ function BestBooks(props) {
         <button id="AddStoryButton" onClick={handleAddBookClick} className="Buttons">Add Book</button>
       </div>
             <div id="carouselContainer" >
-              <Carousel style={{overflow:"hidden",}} id="carousel" onSelect={SelectWorks} interval={null} >
+              <Carousel id="carousel" onSelect={SelectWorks} interval={null} >
                 {books.data.map(arr => {
                   return (
-                    <Carousel.Item id="CarouselItem" style={{color:"white",overflow:"hidden",}} >
+                    <Carousel.Item id="CarouselItem" style={{color:"white"}} >
 
                       <h2 className="carouselItemChild" >{arr.title}</h2>
                       <p id="PInCarousel" className="carouselItemChild" > {arr.description}</p>
