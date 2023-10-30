@@ -115,24 +115,44 @@ function BestBooks(props) {
     }
   }, []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerHeight < window.outerHeight) {
-        // Keyboard is visible
-        document.body.style.height = '100vh'; // Prevents the screen from moving
-      } else {
-        // Keyboard is hidden
-        document.body.style.height = 'auto'; // Reverts to the default behavior
-      }
-    };
+  if (showForm || modalshow) {
+    // Scroll to the top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    });
+    
+    // Prevent scrolling when the keyboard is open
+    document.body.addEventListener('touchmove', preventScroll, { passive: false });
+    
+    // Add event listeners to adjust scrolling when the keyboard opens
+    document.querySelectorAll('input, textarea').forEach((input) => {
+        input.addEventListener('focus', handleInputFocus);
+        input.addEventListener('blur', handleInputBlur);
+    });
+} else {
+    // Remove event listeners
+    document.body.removeEventListener('touchmove', preventScroll, { passive: false });
+    document.querySelectorAll('input, textarea').forEach((input) => {
+        input.removeEventListener('focus', handleInputFocus);
+      
+    });
+}
 
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Handle initial state
+function preventScroll(event) {
+    event.preventDefault();
+}
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+function handleInputFocus(event) {
+    // When an input field is focused, scroll to ensure it's visible
+    const input = event.target;
+    input.scrollIntoView({ behavior: 'smooth', block: 'top' });
+}
+
+function handleInputBlur(event) {
+    // When an input field is blurred (keyboard closed), scroll back to the top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
   function SelectWorks(index) {
     const selectedBook = books.data[index];
