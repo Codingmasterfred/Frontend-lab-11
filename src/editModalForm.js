@@ -39,6 +39,29 @@ function Modalform(props) {
         props.modalshowfunction(false)
     }
 
+    useEffect(() => {
+        const descriptionInput = document.getElementById("Description");
+
+        function handleInputFocus() {
+            // When the input field is focused, prevent scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        function handleInputBlur() {
+            // When the input field is blurred (keyboard closed), allow scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        descriptionInput.addEventListener('focus', handleInputFocus);
+        descriptionInput.addEventListener('blur', handleInputBlur);
+
+        // Clean up the event listeners when the component unmounts
+        return () => {
+            descriptionInput.removeEventListener('focus', handleInputFocus);
+            descriptionInput.removeEventListener('blur', handleInputBlur);
+        };
+    }, []);
+
 
 
 
@@ -57,7 +80,17 @@ function Modalform(props) {
                         </Form.Group>
                         <Form.Group style={{ width: "90%", height: "50%" }} className="mb-3 FormInput">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control as="textarea" style={{ height: "100%" }} placeholder="Description" id="Description" name="Description" value={props.description} onChange={onchangefunctionDescription} required />
+                            <Form.Control
+                                as="textarea"
+                                style={{ height: "100%" }}
+                                placeholder="Description"
+                                id="Description"
+                                name="Description"
+                                value={props.description}
+                                onChange={onchangefunctionDescription}
+                                required
+                                className="scroll-prevent"
+                            />
                         </Form.Group>
 
                         <button className="Buttons" type="submit" style={{ marginTop: "40px" }} onClick={handleSub}>Submit</button>
