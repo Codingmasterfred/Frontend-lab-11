@@ -128,7 +128,7 @@ function BestBooks(props) {
     
     // Add event listeners to adjust scrolling when the keyboard opens
     document.querySelectorAll('input, textarea').forEach((input) => {
-      iput.addEventListener('touchmove', preventScroll, { passive: false });
+      // input.addEventListener('touchmove', preventScroll, { passive: false });
         input.addEventListener('focus', handleInputFocus);
         input.addEventListener('blur', handleInputBlur);
     });
