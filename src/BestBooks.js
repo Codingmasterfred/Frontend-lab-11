@@ -136,7 +136,7 @@ function BestBooks(props) {
     // Remove event listeners
     document.body.removeEventListener('touchmove', preventScroll, { passive: false });
     document.querySelectorAll('input, textarea').forEach((input) => {
-        // input.removeEventListener('focus', handleInputFocus);
+        input.removeEventListener('focus', handleInputFocus);
         input.removeEventListener('blur', handleInputBlur);
     });
 }
