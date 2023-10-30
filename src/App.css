@@ -251,7 +251,7 @@ html, body, #primaryBestbookDiv, #BooksShownParent,#carouselContainer {
     }
 
     #Form{
-        min-height: fit-content;
+        min-height: 200px; /* Set an appropriate height */
         min-width:200px;
         border-image-width: 0px;
        padding: 0%;
