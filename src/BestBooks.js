@@ -161,7 +161,7 @@ function BestBooks(props) {
     console.log("Selection works:", selectedBook);
     setCurrentItemDisplaying(selectedBook)
   }
-
+  }
 
 
 
