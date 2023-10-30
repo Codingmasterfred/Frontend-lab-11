@@ -28,7 +28,7 @@ function BestBooks(props) {
   })
   const [modalshow, modalshowfunction] = useState(false)
   const [CurrentItemDisplaying, setCurrentItemDisplaying] = useState({})
-  const [GotToTop,setGoToTop] = useState(false)
+  const [GotToTop, setGoToTop] = useState(false)
 
   useEffect(() => {
     // Define an async function
@@ -117,7 +117,7 @@ function BestBooks(props) {
   }, []);
 
   if (showForm || modalshow) {
-    if(GotToTop){
+    if (GotToTop) {
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
@@ -129,32 +129,37 @@ function BestBooks(props) {
 
     // Add event listeners to allow scrolling within specific elements
     document.querySelectorAll('textarea').forEach((textarea) => {
-        textarea.addEventListener('touchmove', allowScroll, { passive: true });
+      textarea.addEventListener('touchmove', allowScroll, { passive: true });
+      input.addEventListener('blur', handleInputBlur);
     });
-} else {
+  } else {
     // Remove event listeners when the form is closed
     document.removeEventListener('touchmove', preventScroll, { passive: false });
     document.querySelectorAll('textarea').forEach((textarea) => {
-        textarea.removeEventListener('touchmove', allowScroll, { passive: true });
+      textarea.removeEventListener('touchmove', allowScroll, { passive: true });
     });
-}
+  }
+  function handleInputBlur(event) {
+    // When an input field is blurred (keyboard closed), scroll back to the top
+   setGoToTop(false)
+  }
 
-function preventScroll(event) {
+  function preventScroll(event) {
     event.preventDefault();
-}
+  }
 
-function allowScroll(event) {
-  // Determine if scrolling should be allowed within this element (Form.Control textarea)
-  const isTextArea = event.target.classList.contains('form-control'); // Assuming 'form-control' is the class Bootstrap uses for textarea
+  function allowScroll(event) {
+    // Determine if scrolling should be allowed within this element (Form.Control textarea)
+    const isTextArea = event.target.classList.contains('form-control'); // Assuming 'form-control' is the class Bootstrap uses for textarea
 
-  if (isTextArea) {
+    if (isTextArea) {
       // Allow scrolling within the textarea
       event.stopPropagation();
-  } else {
+    } else {
       // Prevent scrolling for other elements
       event.preventDefault();
+    }
   }
-}
 
   function SelectWorks(index) {
     const selectedBook = books.data[index];
