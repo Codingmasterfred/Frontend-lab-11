@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Form } from 'react-bootstrap';
@@ -38,29 +38,7 @@ function Modalform(props) {
     function change() {
         props.modalshowfunction(false)
     }
-
-    useEffect(() => {
-        const descriptionInput = document.getElementById("Description");
-
-        function handleInputFocus() {
-            // When the input field is focused, prevent scrolling
-            document.body.style.overflow = 'hidden';
-        }
-
-        function handleInputBlur() {
-            // When the input field is blurred (keyboard closed), allow scrolling
-            document.body.style.overflow = 'hidden';
-        }
-
-        descriptionInput.addEventListener('focus', handleInputFocus);
-        descriptionInput.addEventListener('blur', handleInputBlur);
-
-        // Clean up the event listeners when the component unmounts
-        return () => {
-            descriptionInput.removeEventListener('focus', handleInputFocus);
-            descriptionInput.removeEventListener('blur', handleInputBlur);
-        };
-    }, []);
+    
 
 
 
