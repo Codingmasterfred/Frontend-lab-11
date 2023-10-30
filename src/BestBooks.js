@@ -130,13 +130,24 @@ function BestBooks(props) {
         // input.addEventListener('focus', handleInputFocus);
         input.addEventListener('blur', handleInputBlur);
     });
-} 
+} else {
+    // Remove event listeners
+    document.body.removeEventListener('touchmove', preventScroll, { passive: false });
+    document.querySelectorAll('input, textarea').forEach((input) => {
+        // input.removeEventListener('focus', handleInputFocus);
+        input.removeEventListener('blur', handleInputBlur);
+    });
+}
 
 function preventScroll(event) {
     event.preventDefault();
 }
 
-
+function handleInputFocus(event) {
+    // When an input field is focused, scroll to ensure it's visible
+    const input = event.target;
+    input.scrollIntoView({ behavior: 'smooth', block: 'top' });
+}
 
 function handleInputBlur(event) {
     // When an input field is blurred (keyboard closed), scroll back to the top
