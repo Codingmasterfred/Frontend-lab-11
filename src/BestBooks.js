@@ -126,35 +126,35 @@ function BestBooks(props) {
     document.body.addEventListener('touchmove', preventScroll, { passive: false });
 
     
-    // Add event listeners to adjust scrolling when the keyboard opens
-    document.querySelectorAll('.FormInput').forEach((input) => {
-      // input.addEventListener('touchmove', preventScroll, { passive: false });
-        input.addEventListener('focus', handleInputFocus);
-        input.addEventListener('blur', handleInputBlur);
-    });
-} else {
-    // Remove event listeners
-    document.body.removeEventListener('touchmove', preventScroll, { passive: false });
-    document.querySelectorAll('.FormInput').forEach((input) => {
-        input.removeEventListener('focus', handleInputFocus);
-        input.removeEventListener('blur', handleInputBlur);
-    });
-}
+//     // Add event listeners to adjust scrolling when the keyboard opens
+//     document.querySelectorAll('.FormInput').forEach((input) => {
+//       // input.addEventListener('touchmove', preventScroll, { passive: false });
+//         input.addEventListener('focus', handleInputFocus);
+//         input.addEventListener('blur', handleInputBlur);
+//     });
+// } else {
+//     // Remove event listeners
+//     document.body.removeEventListener('touchmove', preventScroll, { passive: false });
+//     document.querySelectorAll('.FormInput').forEach((input) => {
+//         input.removeEventListener('focus', handleInputFocus);
+//         input.removeEventListener('blur', handleInputBlur);
+//     });
+// }
 
-function preventScroll(event) {
-    event.preventDefault();
-}
+// function preventScroll(event) {
+//     event.preventDefault();
+// }
 
-function handleInputFocus(event) {
-    // When an input field is focused, scroll to ensure it's visible
-    const input = event.target;
-    input.scrollIntoView({ behavior: 'smooth', block: 'bottom' });
-}
+// function handleInputFocus(event) {
+//     // When an input field is focused, scroll to ensure it's visible
+//     const input = event.target;
+//     input.scrollIntoView({ behavior: 'smooth', block: 'bottom' });
+// }
 
-function handleInputBlur(event) {
-    // When an input field is blurred (keyboard closed), scroll back to the top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+// function handleInputBlur(event) {
+//     // When an input field is blurred (keyboard closed), scroll back to the top
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+// }
 
   function SelectWorks(index) {
     const selectedBook = books.data[index];
