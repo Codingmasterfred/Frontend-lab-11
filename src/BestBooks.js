@@ -116,47 +116,38 @@ function BestBooks(props) {
   }, []);
 
   if (showForm || modalshow) {
-    // Scroll to the top
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
+    // Add an event listener to the entire document to prevent scrolling
+    document.addEventListener('touchmove', preventScroll, { passive: false });
+
+    // Add event listeners to allow scrolling within specific elements
+    document.querySelectorAll('textarea').forEach((textarea) => {
+        textarea.addEventListener('touchmove', allowScroll, { passive: true });
     });
+} else {
+    // Remove event listeners when the form is closed
+    document.removeEventListener('touchmove', preventScroll, { passive: false });
+    document.querySelectorAll('textarea').forEach((textarea) => {
+        textarea.removeEventListener('touchmove', allowScroll, { passive: true });
+    });
+}
 
-    // Prevent scrolling when the keyboard is open
-    document.body.addEventListener('touchmove', preventScroll, { passive: false });
+function preventScroll(event) {
+    event.preventDefault();
+}
 
+function allowScroll(event) {
+  // Determine if scrolling should be allowed within this element (Form.Control textarea)
+  const isTextArea = event.target.classList.contains('form-control'); // Assuming 'form-control' is the class Bootstrap uses for textarea
 
-    //     // Add event listeners to adjust scrolling when the keyboard opens
-    //     document.querySelectorAll('.FormInput').forEach((input) => {
-    //       // input.addEventListener('touchmove', preventScroll, { passive: false });
-    //         input.addEventListener('focus', handleInputFocus);
-    //         input.addEventListener('blur', handleInputBlur);
-    //     });
-    // } else {
-    //     // Remove event listeners
-    //     document.body.removeEventListener('touchmove', preventScroll, { passive: false });
-    //     document.querySelectorAll('.FormInput').forEach((input) => {
-    //         input.removeEventListener('focus', handleInputFocus);
-    //         input.removeEventListener('blur', handleInputBlur);
-    //     });
-    // }
-
-    function preventScroll(event) {
-        event.preventDefault();
-    }
-
-    // function handleInputFocus(event) {
-    //     // When an input field is focused, scroll to ensure it's visible
-    //     const input = event.target;
-    //     input.scrollIntoView({ behavior: 'smooth', block: 'bottom' });
-    // }
-
-    // function handleInputBlur(event) {
-    //     // When an input field is blurred (keyboard closed), scroll back to the top
-    //     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // }
-
+  if (isTextArea) {
+      // Allow scrolling within the textarea
+      event.stopPropagation();
+  } else {
+      // Prevent scrolling for other elements
+      event.preventDefault();
   }
+}
+
   function SelectWorks(index) {
     const selectedBook = books.data[index];
     console.log("Selection works:", selectedBook);
