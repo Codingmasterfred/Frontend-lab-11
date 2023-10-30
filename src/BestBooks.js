@@ -126,7 +126,7 @@ function BestBooks(props) {
       top: 0,
       behavior: 'smooth',})
     document.body.classList.add("hide-overflow");
-    
+
   } else {
     document.body.classList.remove("hide-overflow");
   }
@@ -142,7 +142,7 @@ function BestBooks(props) {
   /* TODO: render all the books in a Carousel */
 
   return (
-<div id="primaryBestbookDiv" style={{ overflow: showForm === true ? "hidden" : "auto" }}>
+<div id="primaryBestbookDiv" style={{ overflow: showForm === true || modalshow === true ? "hidden" : "auto" }}>
 
       {books.length != 0 ? (
         <div id="BooksShownParent" style={{ justifyContent: showForm === false ? "center" : "space-between" }}>
