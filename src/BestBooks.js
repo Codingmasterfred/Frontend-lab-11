@@ -115,12 +115,7 @@ function BestBooks(props) {
     }
   }, []);
 
-  function SelectWorks(index) {
-    const selectedBook = books.data[index];
-    console.log("Selection works:", selectedBook);
-    setCurrentItemDisplaying(selectedBook)
-  }
-
+  useEffect(() => {
   if (showForm || modalshow) {
     window.scrollTo({
    top: 0,
@@ -130,10 +125,19 @@ function BestBooks(props) {
  } else {
    document.body.removeEventListener('touchmove', preventScroll, { passive: false });
  }
- 
+}, [showForm,modalshow]);
+
+
  function preventScroll(event) {
    event.preventDefault();
  }
+
+  function SelectWorks(index) {
+    const selectedBook = books.data[index];
+    console.log("Selection works:", selectedBook);
+    setCurrentItemDisplaying(selectedBook)
+  }
+
 
 
 
