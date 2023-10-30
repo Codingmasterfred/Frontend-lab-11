@@ -60,7 +60,7 @@ function Modalform(props) {
                             <Form.Label>Description</Form.Label>
                             <Form.Control
                                 as="textarea"
-                                style={{ height: "100%" }}
+                                style={{ height: "100%" ,overflowY: "scroll"}}
                                 placeholder="Description"
                                 id="Description"
                                 name="Description"
