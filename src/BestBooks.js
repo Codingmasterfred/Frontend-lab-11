@@ -142,7 +142,7 @@ function BestBooks(props) {
     
   }, [showForm, modalshow]);
   
-  document.querySelectorAll('textarea').forEach((textarea) => {
+  document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
    
     textarea.addEventListener('blur', handleInputBlur);
   });
