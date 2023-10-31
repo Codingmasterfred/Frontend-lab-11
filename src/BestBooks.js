@@ -89,7 +89,11 @@ function BestBooks(props) {
   }
 
   const enableScroll = () => {
-    document.body.style.overflow = 'auto'; // Re-enable scrolling for the entire document
+
+    const targetDiv = document.getElementById('BooksShownParent'); // Replace with the actual ID of your target div
+  if (targetDiv) {
+    targetDiv.style.overflow = 'auto'; // Re-enable scrolling for the target div
+  }
   };
 
   async function savechanges(id, title, description, status) {
@@ -206,7 +210,7 @@ function BestBooks(props) {
   /* TODO: render all the books in a Carousel */
 
   return (
-    <div id="primaryBestbookDiv" style={{ overflow: showForm === true ? "hidden" : "auto" }}>
+    <div id="primaryBestbookDiv" style={{ }}>
 
       {books.length != 0 ? (
         <div id="BooksShownParent" style={{ justifyContent: showForm === false ? "center" : "space-between" }}>
