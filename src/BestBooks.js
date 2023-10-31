@@ -116,37 +116,39 @@ function BestBooks(props) {
     }
   }, []);
 
-    if (showForm || modalshow) {
-      if (GotToTop) {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-        setGoToTop(false)
-      }
-      // Add an event listener to the entire document to prevent scrolling
-      document.addEventListener('touchmove', preventScroll, { passive: false });
-
-      // Add event listeners to allow scrolling within specific elements
-      document.querySelectorAll('textarea').forEach((textarea) => {
-        textarea.addEventListener('touchmove', allowScroll, { passive: true });
+  if (showForm || modalshow) {
+    if (GotToTop) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
       });
-    } else {
-      // Remove event listeners when the form is closed
-      document.removeEventListener('touchmove', preventScroll, { passive: false });
-      document.querySelectorAll('textarea').forEach((textarea) => {
-        textarea.removeEventListener('touchmove', allowScroll, { passive: true });
-      });
+      setGoToTop(false)
     }
-    
-  useEffect(() => {
-  if(showForm || modalshow) {
-  document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
-   
-    textarea.addEventListener('blur', handleInputBlur);
-  });
+    // Add an event listener to the entire document to prevent scrolling
+    document.addEventListener('touchmove', preventScroll, { passive: false });
+
+    // Add event listeners to allow scrolling within specific elements
+    document.querySelectorAll('textarea').forEach((textarea) => {
+      textarea.addEventListener('touchmove', allowScroll, { passive: true });
+    });
+  } else {
+    // Remove event listeners when the form is closed
+    document.removeEventListener('touchmove', preventScroll, { passive: false });
+    document.querySelectorAll('textarea').forEach((textarea) => {
+      textarea.removeEventListener('touchmove', allowScroll, { passive: true });
+    });
   }
-  }, [showForm, modalshow]);
+
+ useEffect(() => {
+  if (showForm || modalshow) {
+    document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
+      textarea.addEventListener('blur', handleInputBlur);
+    });
+  } else {
+   document.addEventListener('touchmove', allowScroll, { passive: false });
+  }
+}, [showForm, modalshow]);
+
 
 
 
