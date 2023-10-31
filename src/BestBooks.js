@@ -147,6 +147,10 @@ function BestBooks(props) {
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.removeEventListener('touchmove', allowScroll, { passive: true });
     });
+    const targetDiv = document.getElementById('BooksShownParent'); // Replace with the actual ID of your target div
+  if (targetDiv) {
+    targetDiv.style.overflow = 'auto'; // Re-enable scrolling for the target div
+  }
   }
 
  useEffect(() => {
