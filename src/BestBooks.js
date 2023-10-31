@@ -89,26 +89,27 @@ function BestBooks(props) {
   }
   async function savechanges(id, title, description, status) {
     try {
-
+      
       let editBooks = await axios.put(`https://backend-lab-11.onrender.com/books/${id}`, {
-
+        
         title: title,
         description: description,
         status: status,
         id: currenteditbook
-
-
+        
+        
       });
 
       if (editBooks.status === 200) {
         setBooks(editBooks);
       }
-
+      
     } catch (error) {
       console.error(error);
     }
+    location.reload(); 
   }
-
+  
   useEffect(() => {
     // Call SelectWorks for the first item when the component mounts
     if (books && books.data && books.data.length > 0) {
@@ -200,7 +201,7 @@ function BestBooks(props) {
   /* TODO: render all the books in a Carousel */
 
   return (
-    <div id="primaryBestbookDiv" style={{ overflow: showForm === true ? "hidden" : "auto" }}>
+    <div id="primaryBestbookDiv" style={{}}>
 
       {books.length != 0 ? (
         <div id="BooksShownParent" style={{ justifyContent: showForm === false ? "center" : "space-between" }}>
