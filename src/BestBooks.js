@@ -116,7 +116,6 @@ function BestBooks(props) {
     }
   }, []);
 
-  useEffect(() => {
     if (showForm || modalshow) {
       if (GotToTop) {
         window.scrollTo({
@@ -140,12 +139,14 @@ function BestBooks(props) {
       });
     }
     
-  }, [showForm, modalshow]);
-  
+  useEffect(() => {
+  if(showForm || modalshow) {
   document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
    
     textarea.addEventListener('blur', handleInputBlur);
   });
+  }
+  }, [showForm, modalshow]);
 
 
 
