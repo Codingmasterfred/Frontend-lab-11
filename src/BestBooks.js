@@ -117,38 +117,38 @@ function BestBooks(props) {
   }, []);
 
   useEffect(() => {
-  if (showForm || modalshow) {
-    if (GotToTop) {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
+    if (showForm || modalshow) {
+      if (GotToTop) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+        setGoToTop(false)
+      }
+      // Add an event listener to the entire document to prevent scrolling
+      document.addEventListener('touchmove', preventScroll, { passive: false });
+
+      // Add event listeners to allow scrolling within specific elements
+      document.querySelectorAll('textarea').forEach((textarea) => {
+        textarea.addEventListener('touchmove', allowScroll, { passive: true });
+        textarea.addEventListener('blur', handleInputBlur);
       });
-      setGoToTop(false)
+    } else {
+      // Remove event listeners when the form is closed
+      document.removeEventListener('touchmove', preventScroll, { passive: false });
+      document.querySelectorAll('textarea').forEach((textarea) => {
+        textarea.removeEventListener('touchmove', allowScroll, { passive: true });
+      });
     }
-    // Add an event listener to the entire document to prevent scrolling
-    document.addEventListener('touchmove', preventScroll, { passive: false });
 
-    // Add event listeners to allow scrolling within specific elements
-    document.querySelectorAll('textarea').forEach((textarea) => {
-      textarea.addEventListener('touchmove', allowScroll, { passive: true });
-      textarea.addEventListener('blur', handleInputBlur);
-    });
-  } else {
-    // Remove event listeners when the form is closed
-    document.removeEventListener('touchmove', preventScroll, { passive: false });
-    document.querySelectorAll('textarea').forEach((textarea) => {
-      textarea.removeEventListener('touchmove', allowScroll, { passive: true });
-    });
-  }
+  }, [showForm, modalshow]);
 
 
-    document.addEventListener('touchmove', allowScroll, { passive: true });
-   
 
 
   function handleInputBlur(event) {
     // When an input field is blurred (keyboard closed), scroll back to the top
-   setGoToTop(true)
+    setGoToTop(true)
   }
 
   function preventScroll(event) {
@@ -168,7 +168,6 @@ function BestBooks(props) {
     }
   }
 
-}, [showForm,modalshow]);
 
   function SelectWorks(index) {
     const selectedBook = books.data[index];
@@ -217,8 +216,8 @@ function BestBooks(props) {
             <button id="OutsideDeleteButton" className="Buttons OutsideButtons displayOutside" onClick={() => { Delete(CurrentItemDisplaying._id) }}>Delete Story</button>
             <button id="OutsideUpdateButton" className="Buttons OutsideButtons displayOutside" style={{ marginTop: "10px", marginBottom: "10", margin: "auto", textAlign: "center", padding: "15px" }} onClick={() => edit(CurrentItemDisplaying._id, CurrentItemDisplaying.title, CurrentItemDisplaying.description, CurrentItemDisplaying.status)}>Edit Story</button>
           </div >
-          <BookForm   setGoToTop={setGoToTop} setShowForm={setShowForm} getAccessTokenSilently={props.getAccessTokenSilently} currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
-          <Modalform  setGoToTop={setGoToTop} modalshowfunction={modalshowfunction} modalshow={modalshow} currenteditbook={currenteditbook} savechanges={savechanges} modalshowfunction={modalshowfunction} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
+          <BookForm setGoToTop={setGoToTop} setShowForm={setShowForm} getAccessTokenSilently={props.getAccessTokenSilently} currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
+          <Modalform setGoToTop={setGoToTop} modalshowfunction={modalshowfunction} modalshow={modalshow} currenteditbook={currenteditbook} savechanges={savechanges} modalshowfunction={modalshowfunction} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
         </div>
 
       )
