@@ -87,6 +87,11 @@ function BestBooks(props) {
     descriptionchange(description);
     statuschange(status);
   }
+
+  const enableScroll = () => {
+    document.body.style.overflow = 'auto'; // Re-enable scrolling for the entire document
+  };
+
   async function savechanges(id, title, description, status) {
     try {
 
@@ -107,6 +112,7 @@ function BestBooks(props) {
     } catch (error) {
       console.error(error);
     }
+    enableScroll(); 
   }
 
   useEffect(() => {
