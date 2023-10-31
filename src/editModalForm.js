@@ -27,6 +27,7 @@ function Modalform(props) {
 
     const handleSub = (event) => {
         event.preventDefault()
+        
         console.log("Submitted")
 
         props.savechanges(props.currenteditbook, props.title, props.description, "Published")
