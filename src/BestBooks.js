@@ -128,13 +128,13 @@ function BestBooks(props) {
     document.addEventListener('touchmove', preventScroll, { passive: false });
 
     // Add event listeners to allow scrolling within specific elements
-    document.querySelectorAll('textarea').forEach((textarea) => {
+    document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.addEventListener('touchmove', allowScroll, { passive: true });
     });
   } else {
     // Remove event listeners when the form is closed
     // document.removeEventListener('touchmove', preventScroll, { passive: false });
-    document.querySelectorAll('textarea').forEach((textarea) => {
+    document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.removeEventListener('touchmove', allowScroll, { passive: true });
     });
   }
@@ -145,7 +145,7 @@ function BestBooks(props) {
       textarea.addEventListener('blur', handleInputBlur);
     });
   } else {
-   document.addEventListener('touchmove', allowScroll, { passive: false });
+   document.addEventListener('touchmove', allowScroll, { passive: true });
   }
 }, [showForm, modalshow]);
 
