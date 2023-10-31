@@ -87,15 +87,6 @@ function BestBooks(props) {
     descriptionchange(description);
     statuschange(status);
   }
-
-  const enableScroll = () => {
-
-    const targetDiv = document.getElementById('BooksShownParent'); // Replace with the actual ID of your target div
-  if (targetDiv) {
-    targetDiv.style.overflow = 'auto'; // Re-enable scrolling for the target div
-  }
-  };
-
   async function savechanges(id, title, description, status) {
     try {
 
@@ -116,7 +107,6 @@ function BestBooks(props) {
     } catch (error) {
       console.error(error);
     }
-    enableScroll(); 
   }
 
   useEffect(() => {
@@ -147,10 +137,6 @@ function BestBooks(props) {
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.removeEventListener('touchmove', allowScroll, { passive: true });
     });
-    const targetDiv = document.getElementById('BooksShownParent'); // Replace with the actual ID of your target div
-  if (targetDiv) {
-    targetDiv.style.overflow = 'auto'; // Re-enable scrolling for the target div
-  }
   }
 
  useEffect(() => {
@@ -214,7 +200,7 @@ function BestBooks(props) {
   /* TODO: render all the books in a Carousel */
 
   return (
-    <div id="primaryBestbookDiv" style={{ }}>
+    <div id="primaryBestbookDiv" style={{ overflow: showForm === true ? "hidden" : "auto" }}>
 
       {books.length != 0 ? (
         <div id="BooksShownParent" style={{ justifyContent: showForm === false ? "center" : "space-between" }}>
