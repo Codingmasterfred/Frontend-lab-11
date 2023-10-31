@@ -145,7 +145,7 @@ function BestBooks(props) {
       textarea.addEventListener('blur', handleInputBlur);
     });
   } else {
-   document.addEventListener('touchmove', allowScrollScreen, { passive: true });
+    document.removeEventListener('touchmove', preventScroll, { passive: false });
   }
 }, [showForm, modalshow]);
 
