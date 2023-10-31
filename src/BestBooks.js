@@ -177,7 +177,7 @@ function BestBooks(props) {
 
     function allowScrollScreen(event) {
     // Determine if scrolling should be allowed within this element (Form.Control textarea)
-     document.addEventListener('touchmove', preventScroll, { passive: false });
+     document.addEventListener('touchmove', preventScroll, { passive: true });
       event.stopPropagation();
     
   }
