@@ -88,6 +88,7 @@ function BestBooks(props) {
     statuschange(status);
   }
   async function savechanges(id, title, description, status) {
+    window.location.reload()
     try {
       
       let editBooks = await axios.put(`https://backend-lab-11.onrender.com/books/${id}`, {
@@ -107,7 +108,7 @@ function BestBooks(props) {
     } catch (error) {
       console.error(error);
     }
-    window.location.reload(); 
+  
   }
   
   useEffect(() => {
@@ -145,16 +146,13 @@ function BestBooks(props) {
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.addEventListener('blur', handleInputBlur);
     });
-  } else {
-    document.removeEventListener('touchmove', preventScroll, { passive: false });
-   document.addEventListener('touchmove', allowScrollScreen, { passive: true });
-  }
+  } 
 }, [showForm, modalshow]);
 
 
 
 
-  function handleInputBlur(event) {
+  function handleInputBlur() {
     // When an input field is blurred (keyboard closed), scroll back to the top
     setGoToTop(true)
   }
@@ -174,13 +172,6 @@ function BestBooks(props) {
       // Prevent scrolling for other elements
       event.preventDefault();
     }
-  }
-
-    function allowScrollScreen(event) {
-    // Determine if scrolling should be allowed within this element (Form.Control textarea)
-     document.addEventListener('touchmove', preventScroll, { passive: true });
-      event.stopPropagation();
-    
   }
 
 

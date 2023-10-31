@@ -36,6 +36,7 @@ function BookForm(props) {
 
 
 async function onSubmitFunction() {
+    window.location.reload()
     try {
 
         const response = await axios.post('https://backend-lab-11.onrender.com/books', {
