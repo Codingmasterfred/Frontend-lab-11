@@ -107,7 +107,7 @@ function BestBooks(props) {
     } catch (error) {
       console.error(error);
     }
-    location.reload(); 
+    window.location.reload(); 
   }
   
   useEffect(() => {
