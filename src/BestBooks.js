@@ -146,6 +146,7 @@ function BestBooks(props) {
     });
   } else {
     document.removeEventListener('touchmove', preventScroll, { passive: false });
+   document.addEventListener('touchmove', allowScrollScreen, { passive: true });
   }
 }, [showForm, modalshow]);
 
