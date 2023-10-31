@@ -176,15 +176,9 @@ function BestBooks(props) {
 
     function allowScrollScreen(event) {
     // Determine if scrolling should be allowed within this element (Form.Control textarea)
-    const document = event.target.document // Assuming 'form-control' is the class Bootstrap uses for textarea
-
-    if (document) {
-      // Allow scrolling within the textarea
+     document.addEventListener('touchmove', preventScroll, { passive: false });
       event.stopPropagation();
-    } else {
-      // Prevent scrolling for other elements
-      event.preventDefault();
-    }
+    
   }
 
 
