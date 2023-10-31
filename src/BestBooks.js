@@ -133,7 +133,7 @@ function BestBooks(props) {
     });
   } else {
     // Remove event listeners when the form is closed
-    document.removeEventListener('touchmove', preventScroll, { passive: false });
+    // document.removeEventListener('touchmove', preventScroll, { passive: false });
     document.querySelectorAll('textarea').forEach((textarea) => {
       textarea.removeEventListener('touchmove', allowScroll, { passive: true });
     });
