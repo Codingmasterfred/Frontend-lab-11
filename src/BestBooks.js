@@ -116,6 +116,7 @@ function BestBooks(props) {
     }
   }, []);
 
+  useEffect(() => {
   if (showForm || modalshow) {
     if (GotToTop) {
       window.scrollTo({
@@ -166,6 +167,8 @@ function BestBooks(props) {
       event.preventDefault();
     }
   }
+
+}, [showForm,modalshow]);
 
   function SelectWorks(index) {
     const selectedBook = books.data[index];
