@@ -21,11 +21,6 @@ function BestBooks(props) {
   const [status, statuschange] = useState("")
   const [click, clickfunction] = useState(false)
   const [currenteditbook, currenteditbookfunction] = useState(null)
-  const [editbook, editingbook] = useState({
-    title: "",
-    description: "",
-    status: ""
-  })
   const [modalshow, modalshowfunction] = useState(false)
   const [CurrentItemDisplaying, setCurrentItemDisplaying] = useState({})
   const [GotToTop, setGoToTop] = useState(false)
@@ -143,6 +138,7 @@ function BestBooks(props) {
 
  useEffect(() => {
   if (showForm || modalshow) {
+    document.body.style.overflow = "hidden"
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.addEventListener('blur', handleInputBlur);
     });

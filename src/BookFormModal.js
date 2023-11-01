@@ -36,29 +36,29 @@ function BookForm(props) {
 
 
 async function onSubmitFunction() {
-    window.location.reload()
     try {
-
+        
         const response = await axios.post('https://backend-lab-11.onrender.com/books', {
-
-          title: props.title,
+            
+            title: props.title,
           description: props.description,
           status: props.status,
-         
+          
           
         });
         props.setBooks(response)
   
-
+        
       console.log('Response:', response.data);
       // Handle the response data as needed
       
       // Reset the form fields
-   
+      
     } catch (error) {
         console.error('Error saving book:', error);
         // Handle the error
     }
+    window.location.reload()
     props.setShowForm(false)
 };
 console.log(props.showForm)
