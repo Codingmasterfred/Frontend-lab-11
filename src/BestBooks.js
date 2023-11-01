@@ -83,7 +83,6 @@ function BestBooks(props) {
     statuschange(status);
   }
   async function savechanges(id, title, description, status) {
-    window.location.reload()
     try {
       
       let editBooks = await axios.put(`https://backend-lab-11.onrender.com/books/${id}`, {
@@ -95,7 +94,7 @@ function BestBooks(props) {
         
         
       });
-
+      
       if (editBooks.status === 200) {
         setBooks(editBooks);
       }
@@ -103,7 +102,8 @@ function BestBooks(props) {
     } catch (error) {
       console.error(error);
     }
-  
+    window.location.reload()
+    
   }
   
   useEffect(() => {
