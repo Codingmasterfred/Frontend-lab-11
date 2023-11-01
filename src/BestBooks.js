@@ -142,7 +142,9 @@ function BestBooks(props) {
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.addEventListener('blur', handleInputBlur);
     });
-  } 
+  } else{
+    document.body.style.overflow = "auto"
+  }
 }, [showForm, modalshow]);
 
 
