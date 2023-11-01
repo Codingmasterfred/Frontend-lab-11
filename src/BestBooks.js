@@ -102,7 +102,7 @@ function BestBooks(props) {
     } catch (error) {
       console.error(error);
     }
-    window.location.reload()
+   
     
   }
   
