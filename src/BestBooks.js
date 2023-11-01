@@ -134,6 +134,7 @@ function BestBooks(props) {
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.removeEventListener('touchmove', allowScroll, { passive: true });
     });
+    document.removeEventListener('touchmove', preventScroll, { passive: false });
   }
 
  useEffect(() => {
