@@ -219,7 +219,7 @@ function BestBooks(props) {
             <button id="OutsideUpdateButton" className="Buttons OutsideButtons displayOutside" style={{ marginTop: "10px", marginBottom: "10", margin: "auto", textAlign: "center", padding: "15px" }} onClick={() => edit(CurrentItemDisplaying._id, CurrentItemDisplaying.title, CurrentItemDisplaying.description, CurrentItemDisplaying.status)}>Edit Story</button>
           </div >
           <BookForm setGoToTop={setGoToTop} setShowForm={setShowForm} getAccessTokenSilently={props.getAccessTokenSilently} currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
-          <Modalform setGoToTop={setGoToTop} modalshowfunction={modalshowfunction} modalshow={modalshow} currenteditbook={currenteditbook} savechanges={savechanges} modalshowfunction={modalshowfunction} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
+          <Modalform setGoToTop={setGoToTop} modalshowfunction={modalshowfunction} modalshow={modalshow} currenteditbook={currenteditbook} savechanges={savechanges}  showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
         </div>
 
       )
