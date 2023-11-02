@@ -96,7 +96,6 @@ function BestBooks(props) {
       });
       
       if (editBooks.status === 200) {
-        document.getElementById('BooksShownParent').classList.remove('allow-scroll');
         setBooks(editBooks);
       }
       
@@ -146,6 +145,15 @@ function BestBooks(props) {
     });
     
   } 
+}, [showForm, modalshow]);
+
+useEffect(() => {
+  if (!showForm && !modalshow) {
+    document.body.removeEventListener('touchmove', preventScroll);
+    document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
+      textarea.removeEventListener('touchmove', allowScroll);
+    });
+  }
 }, [showForm, modalshow]);
 
 
