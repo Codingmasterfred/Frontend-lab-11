@@ -102,7 +102,7 @@ function BestBooks(props) {
     } catch (error) {
       console.error(error);
     }
-    document.addEventListener('touchmove', allowScroll, { passive: true });
+    document.addEventListener('touchmove', allowScrollScreen, { passive: true });
    
     
   }
@@ -135,7 +135,7 @@ function BestBooks(props) {
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.removeEventListener('touchmove', allowScroll, { passive: true });
     });
-    document.removeEventListener('touchmove', preventScroll, { passive: false });
+    document.addEventListener('touchmove', allowScroll, { passive: true });
   }
 
  useEffect(() => {
@@ -145,7 +145,7 @@ function BestBooks(props) {
       textarea.addEventListener('blur', handleInputBlur);
     });
   } else{
-    document.addEventListener('touchmove', allowScroll, { passive: true });
+    document.addEventListener('touchmove', allowScrollScreen, { passive: true });
   }
 }, [showForm, modalshow]);
 
@@ -166,6 +166,19 @@ function BestBooks(props) {
     const isTextArea = event.target.classList.contains('form-control'); // Assuming 'form-control' is the class Bootstrap uses for textarea
 
     if (isTextArea) {
+      // Allow scrolling within the textarea
+      event.stopPropagation();
+    } else {
+      // Prevent scrolling for other elements
+      event.preventDefault();
+    }
+  }
+
+  function allowScrollScreen(event) {
+    // Determine if scrolling should be allowed within this element (Form.Control textarea)
+    const div = event.target.id.contains('BooksShownParent'); // Assuming 'form-control' is the class Bootstrap uses for textarea
+
+    if (div) {
       // Allow scrolling within the textarea
       event.stopPropagation();
     } else {
