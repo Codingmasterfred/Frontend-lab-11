@@ -102,6 +102,7 @@ function BestBooks(props) {
     } catch (error) {
       console.error(error);
     }
+    document.body.style.overflow = 'auto';
    
     
   }
