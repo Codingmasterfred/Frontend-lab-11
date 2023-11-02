@@ -102,7 +102,7 @@ function BestBooks(props) {
     } catch (error) {
       console.error(error);
     }
-    document.body.style.overflow = 'auto';
+    document.addEventListener('touchmove', allowScroll, { passive: true });
    
     
   }
@@ -145,7 +145,7 @@ function BestBooks(props) {
       textarea.addEventListener('blur', handleInputBlur);
     });
   } else{
-    document.body.style.overflow = "auto"
+    document.addEventListener('touchmove', allowScroll, { passive: true });
   }
 }, [showForm, modalshow]);
 
