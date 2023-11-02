@@ -96,13 +96,14 @@ function BestBooks(props) {
       });
       
       if (editBooks.status === 200) {
+        document.getElementById('BooksShownParent').classList.remove('allow-scroll');
         setBooks(editBooks);
       }
       
     } catch (error) {
       console.error(error);
     }
-    allowScrollScreen()
+    
     // window.location.reload()
     
   }
