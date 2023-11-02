@@ -98,13 +98,12 @@ function BestBooks(props) {
       if (editBooks.status === 200) {
         setBooks(editBooks);
       }
+      window.location.reload()
       
     } catch (error) {
       console.error(error);
     }
-    
-    // window.location.reload()
-    
+  
   }
   
   useEffect(() => {
@@ -123,15 +122,13 @@ function BestBooks(props) {
       setGoToTop(false)
     }
     // Add an event listener to the entire document to prevent scrolling
-    document.body.addEventListener('touchmove', preventScroll, { passive: true });
+    document.addEventListener('touchmove', preventScroll, { passive: false });
 
     // Add event listeners to allow scrolling within specific elements
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.addEventListener('touchmove', allowScroll, { passive: true });
     });
   } else {
-    document.body.removeEventListener('touchmove', preventScroll, { passive: true });
-    // document.body.removeEventListener('touchmove', preventScroll, { passive: false });
     // Remove event listeners when the form is closed
     // document.removeEventListener('touchmove', preventScroll, { passive: false });
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
@@ -145,18 +142,7 @@ function BestBooks(props) {
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.addEventListener('blur', handleInputBlur);
     });
-    
   } 
-}, [showForm, modalshow]);
-
-useEffect(() => {
-  if (!showForm && !modalshow) {
-    document.removeEventListener('touchmove', preventScroll,{ passive: false });
-    document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
-      textarea.removeEventListener('touchmove', allowScroll);
-    });
-    
-  }
 }, [showForm, modalshow]);
 
 
@@ -183,23 +169,6 @@ useEffect(() => {
       event.preventDefault();
     }
   }
-
-  function allowScrollScreen(event) {
-    // Determine if scrolling should be allowed within this element (BooksShownParent div)
-    const isBooksShownParent = event.target.id === 'BooksShownParent'; // Replace with the actual ID of your BooksShownParent div
-    if (isBooksShownParent) {
-      // Allow scrolling within the BooksShownParent div
-      event.stopPropagation();
-    } else {
-      // Prevent scrolling for other elements
-      event.preventDefault();
-    }
-  }
- 
-  
-  
-  
-  
 
 
   function SelectWorks(index) {
