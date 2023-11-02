@@ -123,14 +123,15 @@ function BestBooks(props) {
       setGoToTop(false)
     }
     // Add an event listener to the entire document to prevent scrolling
-    // document.body.addEventListener('touchmove', preventScroll, { passive: false });
+    document.body.addEventListener('touchmove', preventScroll, { passive: true });
 
     // Add event listeners to allow scrolling within specific elements
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.addEventListener('touchmove', allowScroll, { passive: true });
     });
   } else {
-    document.body.removeEventListener('touchmove', preventScroll, { passive: false });
+    document.body.removeEventListener('touchmove', preventScroll, { passive: true });
+    // document.body.removeEventListener('touchmove', preventScroll, { passive: false });
     // Remove event listeners when the form is closed
     // document.removeEventListener('touchmove', preventScroll, { passive: false });
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
