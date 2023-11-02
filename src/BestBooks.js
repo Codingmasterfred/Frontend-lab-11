@@ -60,7 +60,7 @@ function BestBooks(props) {
   async function Delete(id) {
 
     while (id === undefined) {
-      id = books.data[1]._id
+      id = books.data[0]._id
     }
     console.log(id, "final")
     let DeleteData = await axios.delete(`https://backend-lab-11.onrender.com/books/${id}`)
@@ -72,10 +72,10 @@ function BestBooks(props) {
     setGoToTop(true)
     modalshowfunction(true);
     while (id === undefined) {
-      id = books.data[1]._id
-      title = books.data[1].title
-      description = books.data[1].description
-      status = books.data[1].status
+      id = books.data[0]._id
+      title = books.data[0].title
+      description = books.data[0].description
+      status = books.data[0].status
     }
     currenteditbookfunction(id);
     titlechange(title);
@@ -104,6 +104,10 @@ function BestBooks(props) {
       console.error(error);
     }
   
+  }
+
+  function Reload(){
+    window.location.reload()
   }
   
   useEffect(() => {
@@ -218,8 +222,8 @@ function BestBooks(props) {
             <button id="OutsideDeleteButton" className="Buttons OutsideButtons displayOutside" onClick={() => { Delete(CurrentItemDisplaying._id) }}>Delete Story</button>
             <button id="OutsideUpdateButton" className="Buttons OutsideButtons displayOutside" style={{ marginTop: "10px", marginBottom: "10", margin: "auto", textAlign: "center", padding: "15px" }} onClick={() => edit(CurrentItemDisplaying._id, CurrentItemDisplaying.title, CurrentItemDisplaying.description, CurrentItemDisplaying.status)}>Edit Story</button>
           </div >
-          <BookForm setGoToTop={setGoToTop} setShowForm={setShowForm} getAccessTokenSilently={props.getAccessTokenSilently} currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
-          <Modalform setGoToTop={setGoToTop} modalshowfunction={modalshowfunction} modalshow={modalshow} currenteditbook={currenteditbook} savechanges={savechanges}  showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
+          <BookForm Reload={Reload} setGoToTop={setGoToTop} setShowForm={setShowForm} getAccessTokenSilently={props.getAccessTokenSilently} currenteditbook={currenteditbook} showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
+          <Modalform Reload={Reload} setGoToTop={setGoToTop} modalshowfunction={modalshowfunction} modalshow={modalshow} currenteditbook={currenteditbook} savechanges={savechanges}  showForm={showForm} titlechange={titlechange} descriptionchange={descriptionchange} statuschange={statuschange} clickfunction={clickfunction} click={click} title={title} description={description} status={status} setBooks={setBooks} />
         </div>
 
       )
