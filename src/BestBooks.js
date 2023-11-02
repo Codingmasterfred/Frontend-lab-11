@@ -149,10 +149,11 @@ function BestBooks(props) {
 
 useEffect(() => {
   if (!showForm && !modalshow) {
-    document.body.removeEventListener('touchmove', preventScroll);
+    document.removeEventListener('touchmove', preventScroll,{ passive: false });
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.removeEventListener('touchmove', allowScroll);
     });
+    
   }
 }, [showForm, modalshow]);
 
