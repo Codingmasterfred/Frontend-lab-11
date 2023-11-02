@@ -3,27 +3,37 @@ import { Navbar, NavItem } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import "./App.css"
 
-class Header extends React.Component {
-  render() {
-    return (
-      <Navbar id="navbar"  collapseOnSelect expand="lg"  variant="dark">
-        <div id="navbarDiv">
+function Header(props) {
 
-      <Navbar.Brand id="Navbartitle" >My Favorite Books</Navbar.Brand>
-      
+
+  function LogIn() {
+    if (props.user) {
+      props.logout()
+    } else {
+      props.loginWithRedirect()
+    }
+  }
+
+  // console.log(props.user,"----------------------------------------")
+  return (
+    <Navbar id="navbar" collapseOnSelect expand="lg" variant="dark">
+      <div id="navbarDiv">
+
+        <Navbar.Brand id="Navbartitle" >Collection Of Books</Navbar.Brand>
+
         <NavItem id="NavbarUl">
-        <Link  className="Buttons" >
-          Contact Us
+          <Link className="Buttons" to="https://www.linkedin.com/in/fredrick-gentry-43680725b/" >
+            Contact Us
           </Link>
-          <Link id="Login" className="Buttons" >
-           {!this.props.user? "Log In":"logout"}
+          <Link id="Login" className="Buttons" onClick={LogIn} >
+            {!props.user ? "Log In" : "LogOut"}
           </Link>
         </NavItem>
-        </div>
+      </div>
     </Navbar>
-    
-    )
-  }
+
+  )
+
 }
 
 export default Header;

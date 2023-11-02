@@ -47,7 +47,10 @@ const {
           )}
         </div> */}
   <Router>
-      <Header />
+      <Header  loginWithPopup={loginWithPopup}
+            loginWithRedirect={loginWithRedirect}
+            logout={logout}
+            user={user}/>
       <Routes>
         <Route 
           exact path="/"
