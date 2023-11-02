@@ -123,7 +123,7 @@ function BestBooks(props) {
       setGoToTop(false)
     }
     // Add an event listener to the entire document to prevent scrolling
-    document.body.addEventListener('touchmove', preventScroll, { passive: false });
+    // document.body.addEventListener('touchmove', preventScroll, { passive: false });
 
     // Add event listeners to allow scrolling within specific elements
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
