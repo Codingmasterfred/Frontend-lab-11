@@ -11,6 +11,7 @@
 
 html, body, #root {
     height: 100%;
+    background-color: black;
 }
 
 
@@ -88,6 +89,7 @@ html, body, #root {
     height: 100%;
     /* border: 1px solid white; */
     width:100%;
+    min-height:100%;
     padding:0;
     /* border:1px solid white */
 
@@ -236,7 +238,8 @@ html, body, #root {
 
     #BooksShownParent {
      width:90%;
-     height:95%
+     height:95%;
+     min-height:unset
     }
 
     #carouselContainer{
@@ -282,7 +285,7 @@ html, body, #root {
       }
     #AddStoryDiv {
         align-items: flex-start;
-        height:50%;
+        height:30%;
         width:100%;
         margin:20px 0;
        
@@ -290,9 +293,10 @@ html, body, #root {
     }
 
     #AddStoryButton{
+        margin-top: 45px;
         width:90%;
-       height:100%;
-       padding: 0%;
+       height:60%;
+       z-index:10;
       
     }
     
@@ -358,4 +362,9 @@ html, body, #root {
       
     }
 
+}
+
+@media (max-width: 330) {
+    #AddStoryButton{
+        margin-top: 45px;}
 }

@@ -102,7 +102,8 @@ function BestBooks(props) {
     } catch (error) {
       console.error(error);
     }
-    window.location.reload()
+    allowScrollScreen()
+    // window.location.reload()
     
   }
   
@@ -142,6 +143,7 @@ function BestBooks(props) {
     document.querySelectorAll('.FormInput input, .FormInput textarea').forEach((textarea) => {
       textarea.addEventListener('blur', handleInputBlur);
     });
+    document.
   } 
 }, [showForm, modalshow]);
 
@@ -169,6 +171,23 @@ function BestBooks(props) {
       event.preventDefault();
     }
   }
+
+  function allowScrollScreen(event) {
+    // Determine if scrolling should be allowed within this element (BooksShownParent div)
+    const isBooksShownParent = event.target.id === 'BooksShownParent'; // Replace with the actual ID of your BooksShownParent div
+    if (isBooksShownParent) {
+      // Allow scrolling within the BooksShownParent div
+      event.stopPropagation();
+    } else {
+      // Prevent scrolling for other elements
+      event.preventDefault();
+    }
+  }
+ 
+  
+  
+  
+  
 
 
   function SelectWorks(index) {
