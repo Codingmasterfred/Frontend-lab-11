@@ -95,10 +95,10 @@ function BestBooks(props) {
         
       });
       
+      window.location.reload()
       if (editBooks.status === 200) {
         setBooks(editBooks);
       }
-      window.location.reload()
       
     } catch (error) {
       console.error(error);
